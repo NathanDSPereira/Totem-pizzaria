@@ -1,5 +1,5 @@
 import FeedbackCard from "./FeedbackCard";
-import { Feedback } from "@/interface/Feedback";
+import { Feedback } from "@/interface/Categoria";
 
 export default function ListFeedbacks({listaFeedbacks}: {listaFeedbacks: Feedback[]}) {
     return (

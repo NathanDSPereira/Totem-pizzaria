@@ -1,4 +1,4 @@
-import { Feedback } from "@/interface/Feedback";
+import { Feedback } from "@/interface/Categoria";
 import { Star } from "lucide-react";
 import Image from "next/image";
 

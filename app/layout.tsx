@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,27 +13,27 @@ const geistMono = Geist_Mono({
 });
 
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://pizzaria-modelo-landing-page.vercel.app/'),
-  title: 'Pizzaria Duperon | Pizzaria Artesanal em Uberaba',
-  description: 'A melhor pizza de longa fermentação em Uberaba. Ingredientes selecionados, entrega rápida em 20-30 min e sabor inesquecível. Peça agora!',
-  keywords: ['pizzaria uberaba', 'delivery pizza uberaba', 'pizza artesanal', 'melhor pizza de uberaba'],
-  openGraph: {
-    title: 'Pizzaria Duperon | Uberaba',
-    description: 'Experiência premium da pizza artesanal direto na sua mesa.',
-    url: 'https://pizzaria-modelo-landing-page.vercel.app/', // Substitua pelo seu link
-    siteName: 'Pizzaria Duperon',
-    images: [
-      {
-        url: '/og-image.jpg', // Crie uma imagem bonita de 1200x630px para o link
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: 'pt_BR',
-    type: 'website',
-  },
-};
+// export const metadata: Metadata = {
+//   metadataBase: new URL('https://pizzaria-modelo-landing-page.vercel.app/'),
+//   title: 'Pizzaria Duperon | Pizzaria Artesanal em Uberaba',
+//   description: 'A melhor pizza de longa fermentação em Uberaba. Ingredientes selecionados, entrega rápida em 20-30 min e sabor inesquecível. Peça agora!',
+//   keywords: ['pizzaria uberaba', 'delivery pizza uberaba', 'pizza artesanal', 'melhor pizza de uberaba'],
+//   openGraph: {
+//     title: 'Pizzaria Duperon | Uberaba',
+//     description: 'Experiência premium da pizza artesanal direto na sua mesa.',
+//     url: 'https://pizzaria-modelo-landing-page.vercel.app/', // Substitua pelo seu link
+//     siteName: 'Pizzaria Duperon',
+//     images: [
+//       {
+//         url: '/og-image.jpg', // Crie uma imagem bonita de 1200x630px para o link
+//         width: 1200,
+//         height: 630,
+//       },
+//     ],
+//     locale: 'pt_BR',
+//     type: 'website',
+//   },
+// };
 
 export default function RootLayout({
   children,
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen w-screen overflow-hidden bg-zinc-950`}
       >
         {children}
       </body>

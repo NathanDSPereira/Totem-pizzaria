@@ -1,30 +1,25 @@
 import { Pizza } from "@/interface/Pizza";
 import Image  from "next/image";
 
-export default function PizzaCard({ pizzaCard}: {pizzaCard: Pizza}) {
+export default function PizzaCard({ pizzaCard, adicionarAoCarrinho}: {pizzaCard: Pizza, adicionarAoCarrinho: (produto: Pizza) => void}) {
     return (
-        <div className="bg-zinc-950/40 border p-3 border-zinc-800 rounded-4xl overflow-hidden">
-            <div className="relative w-full h-40 mb-3 overflow-hidden">
+        <div className="flex gap-2 flex-col bg-zinc-800/40 border p-3 border-zinc-800 rounded-tl-lg rounded-tr-lg overflow-hidden w-96">
+            <div className="w-full aspect-square mb-3 overflow-hidden">
                 <Image 
                     src={pizzaCard.imagem} 
                     alt={pizzaCard.nome} 
-                    width={200} 
-                    height={200}
+                    width={400} 
+                    height={400}
                     quality={75}
                     className="rounded-tr-lg rounded-tl-lg w-full h-full object-cover"
                 />
             </div>
-            <div className="px-1 text-slate-200 space-y-2">
-                <h3 className="font-semibold font-serif text-lg">{pizzaCard.nome}</h3>
-                <p className="text-zinc-300 leading-5 mb-5 text-sm">{pizzaCard.descricao}</p>
-                <div className="flex w-ful justify-between items-end">
-                    <div>
-                        <p className="text-amber-600 text-xl font-extrabold">R$ {pizzaCard.preco.toFixed(2)}</p>
-                        <p className="text-slate-500 text-sm font-sans">Tamanho: {pizzaCard.tamanho} + {pizzaCard.fatias} fatias</p>
-                    </div>
-                    
-                    <button className="bg-amber-600 active:scale-95 w-10 h-10 flex items-center justify-center text-zinc-950 rounded-full transition-colors shadow-lg hover:cursor-pointer ">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            <div className="flex flex-col gap-2" onClick={(e) => {e.stopPropagation(); adicionarAoCarrinho(pizzaCard)}}>
+                <h2 className="text-2xl font-bold italic">{pizzaCard.nome}</h2>
+                <div className="flex justify-between items-center mt-6">
+                    <p className="text-amber-600 text-2xl font-extrabold">R$ {pizzaCard.preco.toFixed(2)}</p>
+                    <button className="w-14 h-14 rounded-full bg-amber-600 flex items-center justify-center text-zinc-950 active:scale-95 shadow-lg text-4xl font-bold hover:cursor-pointer transition-colors hover:bg-amber-500">
+                        +
                     </button>
                 </div>
             </div>

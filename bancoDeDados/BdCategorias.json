@@ -1,0 +1,26 @@
+[
+  {
+    "id": "promo",
+    "nome": "Promoções",
+    "slug": "promocoes",
+    "icon": "🔥"
+  },
+  {
+    "id": "salgadas",
+    "nome": "Pizzas Salgadas",
+    "slug": "pizzas-salgadas",
+    "icon": "🍕"
+  },
+  {
+    "id": "doces",
+    "nome": "Pizzas Doces",
+    "slug": "pizzas-doces",
+    "icon": "🍫"
+  },
+  {
+    "id": "bebidas",
+    "nome": "Bebidas",
+    "slug": "bebidas",
+    "icon": "🥤"
+  }
+]

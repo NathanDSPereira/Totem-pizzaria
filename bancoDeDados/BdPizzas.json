@@ -1,29 +1,42 @@
 [
   {
-    "id": "1",
-    "nome": "Margherita",
-    "descricao": "Molho de tomate, mussarela, manjericão fresco e azeite de oliva.",
-    "preco": 29.90,
-    "imagem": "/images/margherita.webp",
-    "tamanho": "Média",
-    "fatias": 8
-  },
-  {
-    "id": "2",
-    "nome": "Pepperoni",
-    "descricao": "Molho de tomate, mussarela e fatias generosas de pepperoni.",
-    "preco": 34.90,
+    "id": "p1",
+    "categoriaId": "pizzas-salgadas",
+    "nome": "Pepperoni Classic",
+    "descricao": "Molho de tomate artesanal, muçarela, pepperoni e orégano.",
+    "preco": 69.90,
     "imagem": "/images/pepperoni.webp",
-    "tamanho": "Grande",
-    "fatias": 10
+    "popular": true,
+    "quantidade": 0
   },
   {
-    "id": "3",
-    "nome": "Quatro Queijos",
-    "descricao": "Mussarela, gorgonzola, parmesão e provolone com molho branco.",
-    "preco": 39.90,
+    "id": "p2",
+    "categoriaId": "pizzas-salgadas",
+    "nome": "Margherita Duperon",
+    "descricao": "Muçarela, fatias de tomate fresco, manjericão e azeite.",
+    "preco": 64.90,
+    "imagem": "/images/margherita.webp",
+    "popular": false,
+    "quantidade": 0
+  },
+  {
+    "id": "p3",
+    "categoriaId": "pizzas-doces",
+    "nome": "Chocolate com Morango",
+    "descricao": "Chocolate ao leite derretido com morangos frescos.",
+    "preco": 59.90,
     "imagem": "/images/quatro-queijos.webp",
-    "tamanho": "Grande",
-    "fatias": 10
+    "popular": true,
+    "quantidade": 0
+  },
+  {
+    "id": "b1",
+    "categoriaId": "bebidas",
+    "nome": "Coca-Cola 350ml",
+    "descricao": "Lata gelada.",
+    "preco": 7.00,
+    "imagem": "/images/pepperoni.webp",
+    "popular": false,
+    "quantidade": 0
   }
 ]
