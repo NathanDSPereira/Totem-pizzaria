@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "nome": "Ricardo Silva",
+    "comentario": "A melhor pizza artesanal da região! A massa é leve e os ingredientes são nitidamente frescos. Entrega super rápida.",
+    "estrelas": 5,
+    "urlImagem": "/images/perfil1.png"
+  },
+  {
+    "id": "2",
+    "nome": "Ana Oliveira",
+    "comentario": "Virei cliente fiel. A Pepperoni é incrível e chega bem quentinha. O atendimento pelo WhatsApp também é nota 10.",
+    "estrelas": 5,
+    "urlImagem": "/images/perfil2.png"
+
+  },
+  {
+    "id": "3",
+    "nome": "Lucas Mendes",
+    "comentario": "Experiência premium do início ao fim. O site é fácil de usar e a qualidade da pizza Margherita superou minhas expectativas.",
+    "estrelas": 5,
+    "urlImagem": "/images/perfil3.png"
+  }
+]
