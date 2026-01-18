@@ -1,5 +1,11 @@
 [
   {
+    "id": "combo",
+    "nome": "Combos",
+    "slug": "combos",
+    "icon": "🔥"
+  },
+  {
     "id": "promo",
     "nome": "Promoções",
     "slug": "promocoes",

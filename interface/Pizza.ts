@@ -6,5 +6,6 @@ export interface Pizza {
     preco: number;
     imagem: string;
     popular: boolean;
+    ingredientesIds?: number[];
     quantidade: number;
 }

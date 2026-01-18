@@ -1,0 +1,66 @@
+[
+  {
+    "id": 101,
+    "nome": "Molho de Tomate",
+    "preco": 0.00,
+    "categoria": "base",
+    "podeRemover": false,
+    "podeAdicionar": false
+  },
+  {
+    "id": 102,
+    "nome": "Muçarela",
+    "preco": 0.00,
+    "categoria": "queijos",
+    "podeRemover": true,
+    "podeAdicionar": true
+  },
+  {
+    "id": 103,
+    "nome": "Pepperoni",
+    "preco": 6.50,
+    "categoria": "carnes",
+    "podeRemover": true,
+    "podeAdicionar": true
+  },
+  {
+    "id": 104,
+    "nome": "Cebola",
+    "preco": 0.00,
+    "categoria": "vegetais",
+    "podeRemover": true,
+    "podeAdicionar": true
+  },
+  {
+    "id": 105,
+    "nome": "Bacon Crispy",
+    "preco": 5.00,
+    "categoria": "carnes",
+    "podeRemover": true,
+    "podeAdicionar": true
+  },
+  {
+    "id": 106,
+    "nome": "Azeitona Preta",
+    "preco": 0.00,
+    "categoria": "vegetais",
+    "podeRemover": true,
+    "podeAdicionar": true
+  },
+  {
+    "id": 107,
+    "nome": "Borda de Catupiry",
+    "preco": 8.00,
+    "categoria": "bordas",
+    "podeRemover": true,
+    "podeAdicionar": true
+  },
+  {
+    "id": 108,
+    "nome": "Orégano",
+    "preco": 0.00,
+    "categoria": "tempero",
+    "podeRemover": true,
+    "podeAdicionar": true
+  }
+]

@@ -7,6 +7,7 @@
     "preco": 69.90,
     "imagem": "/images/pepperoni.webp",
     "popular": true,
+    "ingredientesIds": [101, 102, 103, 108],
     "quantidade": 0
   },
   {
@@ -17,16 +18,40 @@
     "preco": 64.90,
     "imagem": "/images/margherita.webp",
     "popular": false,
+    "ingredientesIds": [101, 102, 106, 108],
     "quantidade": 0
   },
   {
     "id": "p3",
+    "categoriaId": "pizzas-salgadas",
+    "nome": "Frango com Catupiry",
+    "descricao": "Frango desfiado temperado, muçarela e o legítimo Catupiry.",
+    "preco": 67.90,
+    "imagem": "/images/pepperoni.webp",
+    "popular": true,
+    "ingredientesIds": [101, 102, 107],
+    "quantidade": 0
+  },
+  {
+    "id": "d1",
     "categoriaId": "pizzas-doces",
     "nome": "Chocolate com Morango",
-    "descricao": "Chocolate ao leite derretido com morangos frescos.",
+    "descricao": "Chocolate ao leite derretido com morangos frescos fatiados.",
     "preco": 59.90,
-    "imagem": "/images/quatro-queijos.webp",
+    "imagem": "/images/pepperoni.webp",
     "popular": true,
+    "ingredientesIds": [],
+    "quantidade": 0
+  },
+  {
+    "id": "d2",
+    "categoriaId": "pizzas-doces",
+    "nome": "Banana com Canela",
+    "descricao": "Banana fatiada, açúcar, canela e gotas de chocolate branco.",
+    "preco": 54.90,
+    "imagem": "/images/pepperoni.webp",
+    "popular": false,
+    "ingredientesIds": [],
     "quantidade": 0
   },
   {
@@ -37,6 +62,40 @@
     "preco": 7.00,
     "imagem": "/images/pepperoni.webp",
     "popular": false,
+    "ingredientesIds": [],
+    "quantidade": 0
+  },
+  {
+    "id": "b2",
+    "categoriaId": "bebidas",
+    "nome": "Suco de Laranja 500ml",
+    "descricao": "Suco natural feito na hora.",
+    "preco": 12.00,
+    "imagem": "/images/pepperoni.webp",
+    "popular": false,
+    "ingredientesIds": [],
+    "quantidade": 0
+  },
+  {
+    "id": "c1",
+    "categoriaId": "combos",
+    "nome": "Combo Casal",
+    "descricao": "1 Pizza Salgada + 1 Pizza Doce Pequena + Coca 1.5L.",
+    "preco": 119.90,
+    "imagem": "/images/pepperoni.webp",
+    "popular": true,
+    "ingredientesIds": [],
+    "quantidade": 0
+  },
+  {
+    "id": "prom1",
+    "categoriaId": "promocoes",
+    "nome": "Terça em Dobro",
+    "descricao": "Compre uma Pepperoni e leve a segunda por apenas R$ 30,00.",
+    "preco": 99.90,
+    "imagem": "/images/pepperoni.webp",
+    "popular": false,
+    "ingredientesIds": [101, 102, 103],
     "quantidade": 0
   }
 ]
