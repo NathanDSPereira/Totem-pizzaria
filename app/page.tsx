@@ -38,6 +38,7 @@ export default function Home() {
   const listIngredientes = BdIngredientes;
 
   const [categoriaAtiva, setCategoriaAtiva] = useState('pizzas-salgadas');
+  const [categoriaNome, setCategoriaNomeAtivo] = useState('Pizzas Salgadas')
   const [carrinho, setCarrinho] = useState<Pizza[]>([]);
   const [isFinalizarAberto, setIsFinalizarAberto] = useState(false);
   const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null>(null);
@@ -73,12 +74,13 @@ export default function Home() {
     })
   }
 
-  const selecionarCategoria = (categoriaSlug: string) => {
+  const selecionarCategoria = (categoriaSlug: string, categoriaNome: string) => {
     setCategoriaAtiva(categoriaSlug);
+    setCategoriaNomeAtivo(categoriaNome)
   };
 
   return (
-    <main className="overflow-hidden bg-zinc-950 h-screen pb-40 pt-4 flex">
+    <div className="overflow-hidden bg-zinc-950 h-screen pb-40 pt-4 flex">
 
       <script
         type="application/ld+json"
@@ -90,36 +92,40 @@ export default function Home() {
         selecionarCategoria={selecionarCategoria}
         categoriaAtiva={categoriaAtiva}
       />
-      <ListPizza 
-        listaPizzas={produtosFiltrados} 
-        adicionarAoCarrinho={adicionarAoCarinho}
-        abrirCustomizacao={editarProduto}
-      />
 
-      {quantidadeTotal > 0 && (
-        <Footer 
-          valorTotal={valorTotal} 
-          quantidadeTotal={quantidadeTotal} 
-          aoFinalizar={() => setIsFinalizarAberto(true)}
+      <main className='flex flex-1 h-screen overflow-hidden'>
+        <ListPizza 
+          listaPizzas={produtosFiltrados} 
+          adicionarAoCarrinho={adicionarAoCarinho}
+          abrirCustomizacao={editarProduto}
+          categoriaNome={categoriaNome}
         />
-      )}
 
-      {isFinalizarAberto && (
-        <CarrinhoModal 
-          itens={carrinho}
-          fechar={() => setIsFinalizarAberto(false)}
-          remover={removerItemCarrinho}
-          total={valorTotal}
-        />
-      )}
+        {quantidadeTotal > 0 && (
+          <Footer 
+            valorTotal={valorTotal} 
+            quantidadeTotal={quantidadeTotal} 
+            aoFinalizar={() => setIsFinalizarAberto(true)}
+          />
+        )}
 
-      {produtoEmEdicao && (
-        <CustomizacaoPizzaModal
-          fecharModal={() => setProdutoEmEdicao(null)}
-          produto={produtoEmEdicao}
-          todosOsIngredientes={listIngredientes}
-        />
-      )}
-    </main>
+        {isFinalizarAberto && (
+          <CarrinhoModal 
+            itens={carrinho}
+            fechar={() => setIsFinalizarAberto(false)}
+            remover={removerItemCarrinho}
+            total={valorTotal}
+          />
+        )}
+
+        {produtoEmEdicao && (
+          <CustomizacaoPizzaModal
+            fecharModal={() => setProdutoEmEdicao(null)}
+            produto={produtoEmEdicao}
+            todosOsIngredientes={listIngredientes}
+          />
+        )}
+      </main>
+    </div>
   );
 }

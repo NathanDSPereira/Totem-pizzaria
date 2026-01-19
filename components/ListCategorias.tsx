@@ -2,7 +2,7 @@ import CategoriaCard from "./CategoriaCard";
 
 import { Categoria } from "@/interface/Categoria";
 
-export default function ListCategorias({listaCategorias, selecionarCategoria, categoriaAtiva} : {listaCategorias: Categoria[], selecionarCategoria: (categoriaSlug: string) => void, categoriaAtiva: string}) {
+export default function ListCategorias({listaCategorias, selecionarCategoria, categoriaAtiva} : {listaCategorias: Categoria[], selecionarCategoria: (categoriaSlug: string, categoriaNome: string) => void, categoriaAtiva: string}) {
     return (
         <nav className="bg-zinc-950 border-r border-zinc-900 h-screen w-72 max-w-72 flex flex-col pt-8">
             <h3 className="text-zinc-500 text-lg font-bold uppercase flex justify-center W-full tracking-widest mb-5 px-4">

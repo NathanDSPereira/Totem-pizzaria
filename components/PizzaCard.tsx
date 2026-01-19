@@ -1,30 +1,46 @@
 import { Pizza } from "@/interface/Pizza";
-import Image  from "next/image";
+import Image from "next/image";
 
-export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProduto}: {pizzaCard: Pizza, adicionarAoCarrinho: (produto: Pizza) => void, editarProduto: (produto: Pizza) => void}) {
-    return (
-        <div 
-            onClick={() => editarProduto(pizzaCard)} 
-            className="flex gap-2 flex-col bg-zinc-800/40 border p-3 border-zinc-800 rounded-tl-lg rounded-tr-lg overflow-hidden w-96">
-            <div className="w-full aspect-square mb-3 overflow-hidden">
-                <Image 
-                    src={pizzaCard.imagem} 
-                    alt={pizzaCard.nome} 
-                    width={400} 
-                    height={400}
-                    quality={75}
-                    className="rounded-tr-lg rounded-tl-lg w-full h-full object-cover"
-                />
-            </div>
-            <div className="flex flex-col gap-2">
-                <h2 className="text-2xl font-bold italic">{pizzaCard.nome}</h2>
-                <div className="flex justify-between items-center mt-6">
-                    <p className="text-amber-600 text-2xl font-extrabold">R$ {pizzaCard.preco.toFixed(2)}</p>
-                    <button onClick={(e) => {e.stopPropagation(); adicionarAoCarrinho(pizzaCard)}} className="w-14 h-14 rounded-full bg-amber-600 flex items-center justify-center text-zinc-950 active:scale-95 shadow-lg text-4xl font-bold hover:cursor-pointer transition-colors hover:bg-amber-500">
-                        +
-                    </button>
+export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProduto }: { pizzaCard: Pizza, adicionarAoCarrinho: (pizza: Pizza) => void, editarProduto: (pizza: Pizza) => void }) {
+  return (
+    <div
+        onClick={() => editarProduto(pizzaCard)} 
+        className="bg-zinc-900/50 border h-100 w-80 max-w-100 border-zinc-800 backdrop-blur-sm p-2 text-slate-200 rounded-lg overflow-hidden transition-all hover:border-amber-600/50">
+        <div className="relative w-full h-1/2 mb-4 overflow-hidden rounded-tr-lg rounded-br-sm rounded-bl-sm rounded-tl-lg">
+            <Image 
+            src={pizzaCard.imagem} 
+            alt={pizzaCard.nome} 
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-transform duration-500 hover:scale-110"
+            />
+        </div>
+
+        <div className="px-1 h-1/2 flex flex-col justify-between">
+            <h3 className="font-bold text-2xl text-white tracking-wide">
+                {pizzaCard.nome}
+            </h3>        
+        
+            <div className="flex w-full py-10 justify-between items-end pt-2">
+                <div>
+                    <p className="text-amber-500 text-2xl font-black">
+                        <span className="text-sm font-medium mr-1 text-amber-600">R$</span>
+                        {pizzaCard.preco.toFixed(2)}
+                    </p>
                 </div>
+            
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        adicionarAoCarrinho(pizzaCard)
+                    }}
+                    className="bg-amber-600 active:scale-90 hover:bg-amber-500 w-12 h-12 flex items-center justify-center text-zinc-950 rounded-2xl transition-all shadow-[0_0_20px_rgba(217,119,6,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14"/><path d="M12 5v14"/>
+                    </svg>
+                </button>
             </div>
         </div>
-    );
+    </div>
+  );
 }

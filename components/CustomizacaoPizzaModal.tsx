@@ -31,7 +31,7 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                         </p>
                     </div>
                     <div className="text-amber-500 text-5xl font-black italic">
-                        R$ {produto.preco.toFixed(2)}
+                        {/* R$ {produto.preco.toFixed(2)} */}
                     </div>
                 </div>
 

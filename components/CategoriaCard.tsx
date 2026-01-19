@@ -1,10 +1,10 @@
 import { Categoria } from "@/interface/Categoria";
 
-export default function CategoriaCard( {categoria, aoSerSelecionado, exibirCategoriaAtiva }: {categoria: Categoria, aoSerSelecionado: (categoriaSlug: string) => void, exibirCategoriaAtiva: boolean}) {
+export default function CategoriaCard( {categoria, aoSerSelecionado, exibirCategoriaAtiva }: {categoria: Categoria, aoSerSelecionado: (categoriaSlug: string, categoriaNome: string) => void, exibirCategoriaAtiva: boolean}) {
 
     function selecionarCategoria() {
         console.log(`Categoria selecionada: ${categoria.slug}`);
-        aoSerSelecionado(categoria.slug);
+        aoSerSelecionado(categoria.slug, categoria.nome);
     }
 
     return (
