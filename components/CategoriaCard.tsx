@@ -13,7 +13,7 @@ export default function CategoriaCard( {categoria, aoSerSelecionado, exibirCateg
             className={`bg-zinc-950 rounded shadow-md p-4 border-b w-full ${exibirCategoriaAtiva ? 'border-amber-500' : 'border-slate-800'} active:bg-zinc-900 active:border-amber-500 flex flex-col items-center gap-2`}>
 
             <p className="text-2xl">{categoria.icon}</p>
-            <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-50">{categoria.nome}</h3>
+            <h3 className="text-2xl font-semibold text-slate-50">{categoria.nome}</h3>
         </button>
     )
 }

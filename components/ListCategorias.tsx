@@ -4,12 +4,12 @@ import { Categoria } from "@/interface/Categoria";
 
 export default function ListCategorias({listaCategorias, selecionarCategoria, categoriaAtiva} : {listaCategorias: Categoria[], selecionarCategoria: (categoriaSlug: string) => void, categoriaAtiva: string}) {
     return (
-        <nav className="gap-8 bg-zinc-950 pt-6 border-r border-zinc-900 min-h-screen w-72 self-center">
-            <h3 className="text-zinc-500 text-lg font-bold uppercase tracking-widest mb-6 px-4">
+        <nav className="bg-zinc-950 border-r border-zinc-900 h-screen w-72 max-w-72 flex flex-col pt-8">
+            <h3 className="text-zinc-500 text-lg font-bold uppercase flex justify-center W-full tracking-widest mb-5 px-4">
                 Categorias
             </h3>
 
-            <ul className="flex flex-col gap-5 w-full">
+            <ul className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
                 {listaCategorias.map((categoria) => (
                     <li key={categoria.id} className="w-full">
                         <CategoriaCard 

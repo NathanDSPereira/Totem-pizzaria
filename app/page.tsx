@@ -78,7 +78,7 @@ export default function Home() {
   };
 
   return (
-    <main className="overflow-x-hidden bg-zinc-950 min-h-screen pb-10 flex">
+    <main className="overflow-hidden bg-zinc-950 h-screen pb-40 pt-4 flex">
 
       <script
         type="application/ld+json"
