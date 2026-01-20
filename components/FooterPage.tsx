@@ -5,19 +5,19 @@ export default function Footer( {valorTotal, quantidadeTotal, aoFinalizar}: {val
     return (
       <footer className="fixed bottom-0 bg-zinc-900/90 backdrop-blur-md w-full border-t border-zinc-800 p-8 flex justify-between items-center px-16">
         <div className="flex flex-col">
-          <span className="text-zinc-500 text-sm font-bold uppercase tracking-widest">Quantidade de pedidos</span>
+          <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest">Quantidade de pedidos</p>
           <div className="flex items-center gap-3">
-            <span className="text-orange-500 text-5xl font-black">{quantidadeTotal.toString().padStart(2, '0')}</span>
-            <span className="text-white text-2xl font-bold">Itens</span>
+            <p className="text-orange-500 text-5xl font-black">{quantidadeTotal.toString().padStart(2, '0')}</p>
+            <p className="text-white text-2xl font-bold">Itens</p>
           </div>
         </div>
 
         <div className="flex items-center gap-16">
           <div className="text-right">
-            <span className="text-zinc-500 text-sm font-bold uppercase block mb-1">Valor Total</span>
-            <span className=" text-4xl font-black text-orange-500">
+            <p className="text-zinc-500 text-sm font-bold uppercase block mb-1">Valor Total</p>
+            <p className=" text-4xl font-black text-orange-500">
               R$ {valorTotal.toFixed(2).replace('.', ',')}
-            </span>
+            </p>
           </div>
 
           <button

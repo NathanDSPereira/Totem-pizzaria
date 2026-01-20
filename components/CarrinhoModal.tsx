@@ -16,8 +16,8 @@ export default function CarrinhoModal({itens, fechar, remover, total}: {itens: P
                     {itens.map((item) => (
                         <li key={item.id} className="flex justify-between items-center border-b border-zinc-900 pb-6">
                             <div className="flex flex-col">
-                                <span className="text-white font-bold text-xl">{item.quantidade}x {item.nome}</span>
-                                <span className="text-orange-500 font-bold text-lg">R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</span>
+                                <p className="text-white font-bold text-xl">{item.quantidade}x {item.nome}</p>
+                                <p className="text-orange-500 font-bold text-lg">R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</p>
                             </div>
                             <button 
                                 onClick={() => remover(item.id)}
@@ -31,8 +31,8 @@ export default function CarrinhoModal({itens, fechar, remover, total}: {itens: P
 
                 <div className="mt-auto pt-8 border-t border-zinc-800">
                     <div className="flex justify-between items-center mb-8">
-                        <span className="text-zinc-500 text-xl font-bold uppercase">Total</span>
-                        <span className=" text-slate-50 text-4xl font-black">R$ {total.toFixed(2).replace('.', ',')}</span>
+                        <p className="text-zinc-500 text-xl font-bold uppercase">Total</p>
+                        <p className=" text-slate-50 text-4xl font-black">R$ {total.toFixed(2).replace('.', ',')}</p>
                     </div>
                     
                     <button className="w-full bg-amber-600 text-black font-black py-6 rounded-2xl text-2xl uppercase shadow-lg shadow-amber-900/20 active:scale-95 transition-all">

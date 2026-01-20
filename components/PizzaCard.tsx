@@ -24,7 +24,7 @@ export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProdut
             <div className="flex w-full py-10 justify-between items-end pt-2">
                 <div>
                     <p className="text-amber-500 text-2xl font-black">
-                        <span className="text-sm font-medium mr-1 text-amber-600">R$</span>
+                        <p className="text-sm font-medium mr-1 text-amber-600">R$</p>
                         {pizzaCard.preco.toFixed(2)}
                     </p>
                 </div>
