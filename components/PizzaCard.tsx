@@ -5,7 +5,7 @@ export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProdut
   return (
     <div
         onClick={() => editarProduto(pizzaCard)} 
-        className="bg-zinc-900/50 border h-100 w-80 max-w-100 border-zinc-800 backdrop-blur-sm p-2 text-slate-200 rounded-lg overflow-hidden transition-all hover:border-amber-600/50">
+        className="bg-zinc-900/50 border h-100 w-80 max-w-100 border-zinc-800 backdrop-blur-sm p-2 text-slate-200 rounded-lg overflow-hidden transition-all active:scale-[0.97]">
         <div className="relative w-full h-1/2 mb-4 overflow-hidden rounded-tr-lg rounded-br-sm rounded-bl-sm rounded-tl-lg">
             <Image 
             src={pizzaCard.imagem} 
@@ -34,7 +34,7 @@ export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProdut
                         e.stopPropagation();
                         adicionarAoCarrinho(pizzaCard)
                     }}
-                    className="bg-amber-600 active:scale-90 hover:bg-amber-500 w-12 h-12 flex items-center justify-center text-zinc-950 rounded-2xl transition-all shadow-[0_0_20px_rgba(217,119,6,0.2)]">
+                    className="bg-amber-600 active:scale-90 hover:bg-amber-500 w-16 h-14 flex items-center justify-center text-zinc-950 rounded-2xl transition-all shadow-[0_0_20px_rgba(217,119,6,0.2)]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14"/><path d="M12 5v14"/>
                     </svg>

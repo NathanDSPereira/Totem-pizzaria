@@ -3,7 +3,7 @@ export default function Footer( {valorTotal, quantidadeTotal, aoFinalizar}: {val
   
 }) {
     return (
-      <footer className="fixed bottom-0 left-0 right-0 bg-zinc-900/90 backdrop-blur-md border-t border-zinc-800 p-8 flex justify-between items-center px-16">
+      <footer className="fixed bottom-0 bg-zinc-900/90 backdrop-blur-md w-full border-t border-zinc-800 p-8 flex justify-between items-center px-16">
         <div className="flex flex-col">
           <span className="text-zinc-500 text-sm font-bold uppercase tracking-widest">Quantidade de pedidos</span>
           <div className="flex items-center gap-3">

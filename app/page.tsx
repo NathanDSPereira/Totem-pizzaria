@@ -80,7 +80,7 @@ export default function Home() {
   };
 
   return (
-    <div className="overflow-hidden bg-zinc-950 h-screen pb-40 pt-4 flex">
+    <div className="overflow-hidden bg-zinc-950 h-screen pt-4 flex">
 
       <script
         type="application/ld+json"
@@ -93,21 +93,13 @@ export default function Home() {
         categoriaAtiva={categoriaAtiva}
       />
 
-      <main className='flex flex-1 h-screen overflow-hidden'>
+      <main className='flex flex-1 flex-col h-[calc(100vw - 50px)] overflow-y-auto custom-scrollbar'>
         <ListPizza 
           listaPizzas={produtosFiltrados} 
           adicionarAoCarrinho={adicionarAoCarinho}
           abrirCustomizacao={editarProduto}
           categoriaNome={categoriaNome}
         />
-
-        {quantidadeTotal > 0 && (
-          <Footer 
-            valorTotal={valorTotal} 
-            quantidadeTotal={quantidadeTotal} 
-            aoFinalizar={() => setIsFinalizarAberto(true)}
-          />
-        )}
 
         {isFinalizarAberto && (
           <CarrinhoModal 
@@ -126,6 +118,14 @@ export default function Home() {
           />
         )}
       </main>
+      
+      {quantidadeTotal > 0 && (
+          <Footer 
+            valorTotal={valorTotal} 
+            quantidadeTotal={quantidadeTotal} 
+            aoFinalizar={() => setIsFinalizarAberto(true)}
+          />
+        )}
     </div>
   );
 }

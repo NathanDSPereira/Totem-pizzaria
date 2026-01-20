@@ -10,7 +10,7 @@ export default function ListPizza({listaPizzas, adicionarAoCarrinho, abrirCustom
                 </h3>
             </div>
 
-            <ul className="w-full flex flex-wrap h-full justify-center mt-10 pb-60 overflow-y-auto custom-scrollbar">
+            <ul className="w-full flex flex-wrap h-[calc(100vw - 200px)] gap-8 justify-center mt-10 pb-60 overflow-y-auto custom-scrollbar">
                 {listaPizzas.map((pizza) => (
                     <li key={pizza.id} className="h-115 w-80 max-w-100">
                         <PizzaCard 
