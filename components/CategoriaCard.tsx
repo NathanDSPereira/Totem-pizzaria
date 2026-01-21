@@ -12,7 +12,7 @@ export default function CategoriaCard( {categoria, aoSerSelecionado, exibirCateg
             onClick={selecionarCategoria} 
             className={`w-full p-6 rounded-2xl flex justify-center items-center gap-4 transition-all duration-200 active:scale-95 
                 ${exibirCategoriaAtiva 
-                ? 'bg-amber-600 text-zinc-950 font-black shadow-[0_0_20px_rgba(245,158,11,0.4)] border-l-8 border-white' 
+                ? 'bg-amber-600 text-zinc-950 font-black shadow-[0_0_20px_rgba(245,158,11,0.4)] border-l-8 border-slate-50' 
                 : 'bg-zinc-900 text-zinc-400 font-bold border-l-8 border-transparent'
                 }`}>
             <div>

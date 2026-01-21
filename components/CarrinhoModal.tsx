@@ -6,7 +6,7 @@ export default function CarrinhoModal({itens, fechar, remover, total}: {itens: P
             <div className="w-125 bg-zinc-950 h-full border-l border-zinc-900 p-8 flex flex-col animate-in slide-in-from-right duration-300">
                 
                 <div className="flex justify-between items-center mb-10">
-                    <h2 className="text-white text-3xl font-black uppercase">Meus Pedidos</h2>
+                    <h2 className="text-slate-100 text-3xl font-black uppercase">Meus Pedidos</h2>
                     <button onClick={fechar} className="text-red-700 text-xl font-bold uppercase">
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     </button>
@@ -16,12 +16,12 @@ export default function CarrinhoModal({itens, fechar, remover, total}: {itens: P
                     {itens.map((item) => (
                         <li key={item.id} className="flex justify-between items-center border-b border-zinc-900 pb-6">
                             <div className="flex flex-col">
-                                <p className="text-white font-bold text-xl">{item.quantidade}x {item.nome}</p>
+                                <p className="text-slate-100 font-bold text-xl">{item.quantidade}x {item.nome}</p>
                                 <p className="text-orange-500 font-bold text-lg">R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</p>
                             </div>
                             <button 
                                 onClick={() => remover(item.id)}
-                                className="bg-red-500/10 text-red-500 p-3 rounded-xl hover:bg-red-500 hover:text-white transition-colors"
+                                className="bg-red-500/10 text-red-500 p-3 rounded-xl hover:bg-red-500 transition-colors"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                             </button>

@@ -17,13 +17,13 @@ export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProdut
         </div>
 
         <div className="px-1 h-1/2 flex flex-col justify-between">
-            <h3 className="font-bold text-2xl text-white tracking-wide">
+            <h3 className="font-bold text-2xl text-slate-50 tracking-wide">
                 {pizzaCard.nome}
             </h3>        
         
             <div className="flex w-full py-10 justify-between items-end pt-2">
                 <div>
-                    <p className="text-amber-500 text-2xl font-black">
+                    <p className="text-amber-500 text-2xl flex items-center font-black">
                         <p className="text-sm font-medium mr-1 text-amber-600">R$</p>
                         {pizzaCard.preco.toFixed(2)}
                     </p>
