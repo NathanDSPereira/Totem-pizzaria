@@ -4,5 +4,5 @@ export interface Ingredientes {
     preco: number;
     categoria: string;
     podeRemover: boolean;
-    Adicionar?: boolean
+    podeAdicionar:boolean
 }
