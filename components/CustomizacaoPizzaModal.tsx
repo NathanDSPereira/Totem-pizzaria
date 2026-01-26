@@ -3,7 +3,7 @@ import { Ingredientes } from "@/interface/Ingredientes"
 import { Pizza } from "@/interface/Pizza"
 
 import Image from "next/image"
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIngredientes}: {produto: Pizza, fecharModal: () => void, todosOsIngredientes: Ingredientes[]}) {
 
@@ -17,6 +17,7 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
 
     const [ingredientesRemovidos, setIngredientesRemovidos] = useState<number[]>([]);
     const [ingredientesExtras, setIngredientesExtras] = useState<Record<string, number>>({})
+
 
     const removerIngrediente = (id: number) => {
         setIngredientesRemovidos((ingredientesAnteriores) => {
@@ -55,6 +56,27 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
         })
     }
 
+    const valorTotalExtra = useMemo(() => {
+        const listaExtras = Object.entries(ingredientesExtras);
+         
+        return listaExtras.reduce((soma, [idItem, quantidadeItem]) => {
+            const id = Number(idItem);
+
+            if(ingredientesRemovidos.includes(id)) {
+                return soma;
+            }
+
+            const dadosDoIngrediente = todosOsIngredientes.find((item) => item.id == id);
+            const precoUnitario = dadosDoIngrediente?.preco || 0;
+
+            return soma + (precoUnitario * quantidadeItem);
+        }, 0)
+
+    }, [ingredientesExtras, ingredientesRemovidos, todosOsIngredientes]);
+
+    const precoProdutoFinal = produto.preco + valorTotalExtra
+
+
     return (
         <div className="fixed inset-0 h-screen bg-black/80 z-200 flex justify-center items-center w-full mx-auto my-auto">
             
@@ -81,9 +103,9 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                         <p className="text-zinc-500 text-2xl text-center max-w-md leading-relaxed">
                             {produto.descricao}
                         </p>
-                        <div className="text-amber-500 text-4xl font-black italic">
-                            R$ {produto.preco.toFixed(2)}
-                        </div>
+                        <p className="text-amber-500 text-4xl font-black italic">
+                            R$ {produto.preco.toFixed(2).replace('.', ',')}
+                        </p>
                     </div>
                 </div>
 
@@ -116,12 +138,16 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                         
                         {ingredientesQuePodemAdicionar.map((ing) => {
                             const itemRemovido = ingredientesRemovidos.includes(ing.id)
-                            const quantidadeExtra = ingredientesExtras[ing.id] || 1
+                            const quantidadeExtra = ingredientesExtras[ing.id] || 0
 
                             return (
                                 <li key={ing.id} className={`bg-zinc-900/50 border border-zinc-800 p-5 rounded-3xl flex justify-between items-center shadow-lg ${itemRemovido ? 'opacity-20 grayscale pointer-events-none': 'opacity-100'}`}>
-                                    <p className="text-slate-50 text-xl font-bold italic uppercase">{ing.nome}</p>
-                                    
+                                    <div className="flex gap-4">
+                                        <p className="text-slate-50 text-xl font-bold italic uppercase">R$ {ing.preco.toFixed(2).replace('.', ',')}</p>
+                                        <p className="text-slate-50 text-xl font-bold italic uppercase">-</p>
+                                        <p className="text-slate-50 text-xl font-bold italic uppercase">{ing.nome}</p>
+                                    </div>
+
                                     <div className="flex items-center gap-8">
                                         <button
                                             disabled={itemRemovido || quantidadeExtra === 0}
@@ -141,10 +167,21 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                         })}
                     </ul>
 
-                    <button className="mt-10 bg-amber-600 h-30 p-4 rounded-3xl flex justify-between w-full items-center active:scale-95 transition-all">
-                        <p className="text-zinc-950 text-3xl font-black uppercase italic">Adicionar</p>
-                        <p className="text-zinc-950 text-3xl font-black">R$ 134,90</p>
-                    </button>
+                    <div className="flex justify-center items-center"> 
+                        <button className="mt-10 bg-amber-600 h-30 p-10 rounded-3xl max-w-4/5 flex justify-between w-full items-center active:scale-95 transition-all">
+                            <p className="text-zinc-950 text-3xl font-black uppercase italic">Adicionar por</p>
+                            <p className="text-zinc-950 text-3xl font-black">R$ {valorTotalExtra.toFixed(2).replace('.', ',')}</p>
+                        </button>
+                    </div>
+                    
+                    <div className="flex gap-4 items-center justify-end mt-15">
+                        <p className="text-slate-300 text-2xl font-black">
+                            Preço total:
+                        </p>
+                        <p className="text-slate-300 text-3xl font-black">
+                            R$ {precoProdutoFinal.toFixed(2).replace('.', ',')}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

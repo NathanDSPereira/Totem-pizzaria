@@ -3,16 +3,18 @@
 import ListPizza from '@/components/ListPizza';
 import ListCategorias from '@/components/ListCategorias';
 import Footer from '@/components/FooterPage';
+import CarrinhoModal from '@/components/CarrinhoModal';
+import CustomizacaoPizzaModal from '@/components/CustomizacaoPizzaModal';
 
 import BdPizzas from '@/bancoDeDados/BdPizzas.json';
 import BdCategorias from '@/bancoDeDados/BdCategorias.json';
 import BdIngredientes from '@/bancoDeDados/BdIngredientes.json'
 
+import { Pizza } from '@/interface/Pizza';
+import { ItemCarrinho } from '@/interface/ItemCarrinho';
+
 import { useState } from 'react';
 
-import { Pizza } from '@/interface/Pizza';
-import CarrinhoModal from '@/components/CarrinhoModal';
-import CustomizacaoPizzaModal from '@/components/CustomizacaoPizzaModal';
 
 export default function Home() {
 
@@ -39,7 +41,7 @@ export default function Home() {
 
   const [categoriaAtiva, setCategoriaAtiva] = useState('pizzas-salgadas');
   const [categoriaNome, setCategoriaNomeAtivo] = useState('Pizzas Salgadas')
-  const [carrinho, setCarrinho] = useState<Pizza[]>([]);
+  const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]);
   const [isFinalizarAberto, setIsFinalizarAberto] = useState(false);
   const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null>(null);
 
@@ -59,7 +61,7 @@ export default function Home() {
     })
   }
 
-  const adicionarAoCarinho = (produto: Pizza) => {
+  const adicionarAoCarinho = (produto: ItemCarrinho) => {
     setCarrinho((itensAtuais) => {
       const itemExiste = itensAtuais.find((item) => item.id === produto.id)
 
