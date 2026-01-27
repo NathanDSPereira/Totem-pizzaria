@@ -1,8 +1,7 @@
 import { Pizza } from "@/interface/Pizza";
 import Image from "next/image";
-import { ItemCarrinho } from "@/interface/ItemCarrinho";
 
-export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProduto }: { pizzaCard: ItemCarrinho, adicionarAoCarrinho: (pizza: ItemCarrinho) => void, editarProduto: (pizza: Pizza) => void }) {
+export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProduto }: { pizzaCard: Pizza, adicionarAoCarrinho: (pizza: Pizza) => void, editarProduto: (pizza: Pizza) => void }) {
   return (
     <div
         onClick={() => editarProduto(pizzaCard)} 

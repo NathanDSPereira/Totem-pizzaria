@@ -46,8 +46,8 @@ export default function Home() {
   const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null>(null);
 
   const produtosFiltrados = listaPizzas.filter((produto) => produto.categoriaId == categoriaAtiva);
-  const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.preco * item.quantidade), 0)
-  const quantidadeTotal = carrinho.reduce((acumulador, item) => acumulador + item.quantidade, 0)
+  const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.precoTotal * item.quantidadeCarrinho), 0)
+  const quantidadeTotal = carrinho.reduce((acumulador, item) => acumulador + item.quantidadeCarrinho, 0)
 
 
 
@@ -61,18 +61,34 @@ export default function Home() {
     })
   }
 
-  const adicionarAoCarinho = (produto: ItemCarrinho) => {
-    setCarrinho((itensAtuais) => {
-      const itemExiste = itensAtuais.find((item) => item.id === produto.id)
+  const adicionarAoCarrinho = (produto: Pizza | ItemCarrinho) => {
+    setCarrinho((itensAtuais : ItemCarrinho[]) => {
+
+      const novoItem: ItemCarrinho = ('cartId' in produto) 
+        ? produto 
+        : {
+            ...produto, 
+            cartId: `${produto.id}-${Date.now()}`,
+            precoTotal: produto.preco,
+            removidos: [],
+            extras: [],
+            quantidadeCarrinho: 1
+      }
+
+      const itemExiste = itensAtuais.find((anterior) => 
+        anterior.id === novoItem.id &&
+        JSON.stringify(anterior.removidos) === JSON.stringify(novoItem.removidos) &&
+        JSON.stringify(anterior.extras) === JSON.stringify(novoItem.extras)
+      );
 
       if(itemExiste) {
         return itensAtuais.map((item) => 
-          item.id === produto.id 
-          ? {...item, quantidade: item.quantidade + 1} : item
+          item.cartId === itemExiste.cartId 
+          ? {...item, quantidadeCarrinho: (item.quantidadeCarrinho || 0) + 1} : item
         )
       }
 
-      return [...itensAtuais, {...produto, quantidade: 1}]
+      return [...itensAtuais, novoItem]
     })
   }
 
@@ -98,7 +114,7 @@ export default function Home() {
       <main className='flex flex-1 flex-col h-[calc(100vw - 50px)] overflow-y-auto custom-scrollbar'>
         <ListPizza 
           listaPizzas={produtosFiltrados} 
-          adicionarAoCarrinho={adicionarAoCarinho}
+          adicionarAoCarrinho={adicionarAoCarrinho}
           abrirCustomizacao={editarProduto}
           categoriaNome={categoriaNome}
         />
@@ -109,11 +125,13 @@ export default function Home() {
             fechar={() => setIsFinalizarAberto(false)}
             remover={removerItemCarrinho}
             total={valorTotal}
+            todosOsIngredientes={listIngredientes}
           />
         )}
 
         {produtoEmEdicao && (
           <CustomizacaoPizzaModal
+            adicionarAoCarrinho={adicionarAoCarrinho}
             fecharModal={() => setProdutoEmEdicao(null)}
             produto={produtoEmEdicao}
             todosOsIngredientes={listIngredientes}

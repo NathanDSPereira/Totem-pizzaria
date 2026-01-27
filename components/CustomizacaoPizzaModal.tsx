@@ -1,11 +1,12 @@
 'use client'
 import { Ingredientes } from "@/interface/Ingredientes"
+import { ItemCarrinho } from "@/interface/ItemCarrinho";
 import { Pizza } from "@/interface/Pizza"
 
 import Image from "next/image"
 import { useMemo, useState } from "react";
 
-export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIngredientes}: {produto: Pizza, fecharModal: () => void, todosOsIngredientes: Ingredientes[]}) {
+export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIngredientes, adicionarAoCarrinho}: {produto: Pizza, fecharModal: () => void, todosOsIngredientes: Ingredientes[], adicionarAoCarrinho: (pizza: Pizza | ItemCarrinho) => void}) {
 
     const ingredientesQuePodemRemover = todosOsIngredientes.filter((ing) => 
         produto.ingredientesIds?.includes(ing.id) && ing.podeRemover
@@ -73,6 +74,23 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
         }, 0)
 
     }, [ingredientesExtras, ingredientesRemovidos, todosOsIngredientes]);
+
+    const adicionarPizzaPersonalizada = () => {
+        const timeStamp = new Date().getTime()
+        const idUnico = `${produto.id}-${timeStamp}`
+
+        const pizzaModificada : ItemCarrinho = {
+            ...produto,
+            cartId: idUnico,
+            precoTotal: precoProdutoFinal,
+            removidos: ingredientesRemovidos,
+            extras: ingredientesExtras,
+            quantidadeCarrinho: 1
+        }
+
+        adicionarAoCarrinho(pizzaModificada)
+        fecharModal();
+    }
 
     const precoProdutoFinal = produto.preco + valorTotalExtra
 
@@ -168,7 +186,9 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                     </ul>
 
                     <div className="flex justify-center items-center"> 
-                        <button className="mt-10 bg-amber-600 h-30 p-10 rounded-3xl max-w-4/5 flex justify-between w-full items-center active:scale-95 transition-all">
+                        <button 
+                            onClick={adicionarPizzaPersonalizada}
+                            className="mt-10 bg-amber-600 h-30 p-10 rounded-3xl max-w-4/5 flex justify-between w-full items-center active:scale-95 transition-all">
                             <p className="text-zinc-950 text-3xl font-black uppercase italic">Adicionar por</p>
                             <p className="text-zinc-950 text-3xl font-black">R$ {valorTotalExtra.toFixed(2).replace('.', ',')}</p>
                         </button>

@@ -1,6 +1,8 @@
-import { Pizza } from "@/interface/Pizza"
+import { ItemCarrinho } from "@/interface/ItemCarrinho"
+import CarrinhoItemCard from "./CarrinhoItemCard"
+import { Ingredientes } from "@/interface/Ingredientes"
 
-export default function CarrinhoModal({itens, fechar, remover, total}: {itens: Pizza[], fechar: () => void, remover: (id: string) => void, total: number}) {
+export default function CarrinhoModal({itens, fechar, remover, total, todosOsIngredientes}: {itens: ItemCarrinho[], fechar: () => void, remover: (id: string) => void, total: number, todosOsIngredientes: Ingredientes[]}) {
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100 flex justify-end">
             <div className="w-125 bg-zinc-950 h-full border-l border-zinc-900 p-8 flex flex-col animate-in slide-in-from-right duration-300">
@@ -14,17 +16,13 @@ export default function CarrinhoModal({itens, fechar, remover, total}: {itens: P
 
                 <ul className="flex-1 overflow-y-auto flex flex-col gap-6 custom-scrollbar pb-10">
                     {itens.map((item) => (
-                        <li key={item.id} className="flex justify-between items-center border-b border-zinc-900 pb-6">
-                            <div className="flex flex-col">
-                                <p className="text-slate-100 font-bold text-xl">{item.quantidade}x {item.nome}</p>
-                                <p className="text-orange-500 font-bold text-lg">R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</p>
-                            </div>
-                            <button 
-                                onClick={() => remover(item.id)}
-                                className="bg-red-500/10 text-red-500 p-3 rounded-xl hover:bg-red-500 transition-colors"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                            </button>
+                        <li key={item.id} className="border-b border-zinc-900">
+                            <CarrinhoItemCard
+                                key={item.id}
+                                carrinhoItem={item} 
+                                remover={remover} 
+                                todosOsIngredientes={todosOsIngredientes}
+                            />
                         </li>
                     ))}
                 </ul>
