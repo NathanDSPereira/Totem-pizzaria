@@ -123,7 +123,7 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                                     <p className="text-slate-50 text-xl font-bold italic uppercase">{ing.nome}</p>
                                     
                                     <div className="flex items-center gap-8">
-                                        <button
+                                        <button 
                                             disabled={itemRemovido || quantidadeExtra === 0}
                                             onClick={() => diminuirExtra(ing.id)}
                                             className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center text-4xl text-zinc-400 hover:bg-red-500/20 hover:text-red-500 transition-all">
