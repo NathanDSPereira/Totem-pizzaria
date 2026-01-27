@@ -1,7 +1,8 @@
 import { Pizza } from "@/interface/Pizza";
 import Image from "next/image";
+import { ItemCarrinho } from "@/interface/ItemCarrinho";
 
-export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProduto }: { pizzaCard: Pizza, adicionarAoCarrinho: (pizza: Pizza) => void, editarProduto: (pizza: Pizza) => void }) {
+export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProduto }: { pizzaCard: ItemCarrinho, adicionarAoCarrinho: (pizza: ItemCarrinho) => void, editarProduto: (pizza: Pizza) => void }) {
   return (
     <div
         onClick={() => editarProduto(pizzaCard)} 
@@ -25,7 +26,7 @@ export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProdut
                 <div>
                     <p className="text-amber-500 text-2xl flex items-center font-black">
                         <p className="text-sm font-medium mr-1 text-amber-600">R$</p>
-                        {pizzaCard.preco.toFixed(2)}
+                        {pizzaCard.preco.toFixed(2).replace('.', ',')}
                     </p>
                 </div>
             

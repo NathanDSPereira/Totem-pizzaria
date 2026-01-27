@@ -10,7 +10,7 @@
   {
     "id": 102,
     "nome": "Muçarela",
-    "preco": 0.00,
+    "preco": 2.00,
     "categoria": "queijos",
     "podeRemover": true,
     "podeAdicionar": true
@@ -42,7 +42,7 @@
   {
     "id": 106,
     "nome": "Azeitona Preta",
-    "preco": 0.00,
+    "preco": 2.00,
     "categoria": "vegetais",
     "podeRemover": true,
     "podeAdicionar": true
