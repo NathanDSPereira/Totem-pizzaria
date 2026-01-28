@@ -2,9 +2,9 @@ import { ItemCarrinho } from "@/interface/ItemCarrinho"
 import CarrinhoItemCard from "./CarrinhoItemCard"
 import { Ingredientes } from "@/interface/Ingredientes"
 
-export default function CarrinhoModal({itens, fechar, remover, total, todosOsIngredientes}: {itens: ItemCarrinho[], fechar: () => void, remover: (id: string) => void, total: number, todosOsIngredientes: Ingredientes[]}) {
+export default function CarrinhoModal({itens, fechar, remover, total, todosOsIngredientes}: {itens: ItemCarrinho[], fechar: () => void, remover: (produto: ItemCarrinho) => void, total: number, todosOsIngredientes: Ingredientes[]}) {
     return (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100 flex justify-end">
+        <section className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100 flex justify-end">
             <div className="w-125 bg-zinc-950 h-full border-l border-zinc-900 p-8 flex flex-col animate-in slide-in-from-right duration-300">
                 
                 <div className="flex justify-between items-center mb-10">
@@ -38,6 +38,6 @@ export default function CarrinhoModal({itens, fechar, remover, total, todosOsIng
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }

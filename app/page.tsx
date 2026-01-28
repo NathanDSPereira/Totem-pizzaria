@@ -14,6 +14,7 @@ import { Pizza } from '@/interface/Pizza';
 import { ItemCarrinho } from '@/interface/ItemCarrinho';
 
 import { useState } from 'react';
+import SelecionarQuantidadeExclusaoModal from '@/components/SelecionarQuantidadeExclusaoModal';
 
 
 export default function Home() {
@@ -44,6 +45,7 @@ export default function Home() {
   const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]);
   const [isFinalizarAberto, setIsFinalizarAberto] = useState(false);
   const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null>(null);
+  const [produtoARetirarCarrinho, setProdutoARetirarCarrinho] = useState<ItemCarrinho | null>(null);
 
   const produtosFiltrados = listaPizzas.filter((produto) => produto.categoriaId == categoriaAtiva);
   const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.precoTotal * item.quantidadeCarrinho), 0)
@@ -59,6 +61,33 @@ export default function Home() {
     setCarrinho((itensAtuais) => {
       return itensAtuais.filter(item => item.id !== id);
     })
+  }
+
+  const aoClicarEmExcluirProdutoCarrinho = (produto: ItemCarrinho) => {
+    if(produto.quantidadeCarrinho > 1) {
+      setProdutoARetirarCarrinho(produto);
+    } else {
+      removerItemCarrinho(produto.id)
+    }
+  }
+
+  const retirarProdutoCarrinhoSegundoQuantidade = (quantidadeARetirar: number) => {
+    if(!produtoARetirarCarrinho) return
+
+    setCarrinho((anteriores) => {
+      const listaAtualizada = anteriores.map((item) => {
+        if(item.cartId === produtoARetirarCarrinho.cartId) {
+          const novaQuantidade = item.quantidadeCarrinho - quantidadeARetirar
+  
+          if(novaQuantidade <= 0) return null;
+  
+          return {...item, quantidadeCarrinho: novaQuantidade};
+        }
+        return item;
+      })
+      return listaAtualizada.filter((item): item is ItemCarrinho => item !== null)
+    })
+    setProdutoARetirarCarrinho(null);
   }
 
   const adicionarAoCarrinho = (produto: Pizza | ItemCarrinho) => {
@@ -98,7 +127,7 @@ export default function Home() {
   };
 
   return (
-    <div className="overflow-hidden bg-zinc-950 h-screen pt-4 flex">
+    <section className="overflow-hidden bg-zinc-950 h-screen pt-4 flex">
 
       <script
         type="application/ld+json"
@@ -123,7 +152,7 @@ export default function Home() {
           <CarrinhoModal 
             itens={carrinho}
             fechar={() => setIsFinalizarAberto(false)}
-            remover={removerItemCarrinho}
+            remover={aoClicarEmExcluirProdutoCarrinho}
             total={valorTotal}
             todosOsIngredientes={listIngredientes}
           />
@@ -146,6 +175,13 @@ export default function Home() {
             aoFinalizar={() => setIsFinalizarAberto(true)}
           />
         )}
-    </div>
+
+        {produtoARetirarCarrinho && (
+          <SelecionarQuantidadeExclusaoModal
+            produtoARetirarCarrinho={produtoARetirarCarrinho}
+            confirmar={retirarProdutoCarrinhoSegundoQuantidade}
+          />
+        )}
+    </section>
   );
 }

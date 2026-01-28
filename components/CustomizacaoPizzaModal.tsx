@@ -96,7 +96,7 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
 
 
     return (
-        <div className="fixed inset-0 h-screen bg-black/80 z-200 flex justify-center items-center w-full mx-auto my-auto">
+        <section className="fixed inset-0 h-screen bg-black/80 z-200 flex justify-center items-center w-full mx-auto my-auto">
             
             <div className="w-full mx-auto sm:overflow-y-auto custom-scrollbar my-auto max-w-[90vw] h-full max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-[40px] shadow-2xl overflow-hidden flex flex-col">
 
@@ -204,6 +204,6 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
