@@ -1,7 +1,7 @@
 import { Ingredientes } from "@/interface/Ingredientes";
 import { ItemCarrinho } from "@/interface/ItemCarrinho";
 
-export default function CarrinhoItemCard({carrinhoItem, remover, todosOsIngredientes} : {carrinhoItem: ItemCarrinho, remover: (produto: ItemCarrinho) => void, todosOsIngredientes: Ingredientes[]}) {
+export default function CarrinhoItemCard({carrinhoItem, remover, todosOsIngredientes, editarProduto} : {carrinhoItem: ItemCarrinho, remover: (produto: ItemCarrinho) => void, todosOsIngredientes: Ingredientes[], editarProduto: (produto: ItemCarrinho) => void}) {
 
     const nomeIngredientesRemovidos = carrinhoItem.removidos.map((id) => 
         todosOsIngredientes.find((ing) => ing.id === id)?.nome    
@@ -16,7 +16,9 @@ export default function CarrinhoItemCard({carrinhoItem, remover, todosOsIngredie
     const temModificacao = nomeIngredientesExtras.length > 0 || nomeIngredientesRemovidos.length > 0
 
     return (
-        <div key={carrinhoItem.id} className="flex justify-between items-center border-b border-zinc-900 pb-6">
+        <div
+            onClick={() => editarProduto(carrinhoItem)} 
+            key={carrinhoItem.id} className="flex justify-between items-center border-b border-zinc-900 pb-6">
             <div className="flex flex-col">
                 <p className="text-slate-100 font-bold text-xl">{carrinhoItem.quantidadeCarrinho} x {carrinhoItem.nome}
                 </p>

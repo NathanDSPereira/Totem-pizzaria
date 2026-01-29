@@ -44,7 +44,7 @@ export default function Home() {
   const [categoriaNome, setCategoriaNomeAtivo] = useState('Pizzas Salgadas')
   const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]);
   const [isFinalizarAberto, setIsFinalizarAberto] = useState(false);
-  const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null>(null);
+  const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null | ItemCarrinho>(null);
   const [produtoARetirarCarrinho, setProdutoARetirarCarrinho] = useState<ItemCarrinho | null>(null);
 
   const produtosFiltrados = listaPizzas.filter((produto) => produto.categoriaId == categoriaAtiva);
@@ -59,7 +59,7 @@ export default function Home() {
 
   const removerItemCarrinho = (id: string) => {
     setCarrinho((itensAtuais) => {
-      return itensAtuais.filter(item => item.id !== id);
+      return itensAtuais.filter(item => item.cartId !== id);
     })
   }
 
@@ -67,7 +67,7 @@ export default function Home() {
     if(produto.quantidadeCarrinho > 1) {
       setProdutoARetirarCarrinho(produto);
     } else {
-      removerItemCarrinho(produto.id)
+      removerItemCarrinho(produto.cartId)
     }
   }
 
@@ -97,10 +97,10 @@ export default function Home() {
         ? produto 
         : {
             ...produto, 
-            cartId: `${produto.id}-${Date.now()}`,
+            cartId: gerarCartId(produto.id, {}, []),
             precoTotal: produto.preco,
             removidos: [],
-            extras: [],
+            extras: {},
             quantidadeCarrinho: 1
       }
 
@@ -111,7 +111,7 @@ export default function Home() {
       );
 
       if(itemExiste) {
-        return itensAtuais.map((item) => 
+        return itensAtuais.map((item) =>
           item.cartId === itemExiste.cartId 
           ? {...item, quantidadeCarrinho: (item.quantidadeCarrinho || 0) + 1} : item
         )
@@ -125,6 +125,13 @@ export default function Home() {
     setCategoriaAtiva(categoriaSlug);
     setCategoriaNomeAtivo(categoriaNome)
   };
+
+  const gerarCartId = (produtoId: string, extras: Record<number, number>, removidos: number[]) => {
+    const extasString = JSON.stringify(Object.keys(extras).sort());
+    const removidoString = JSON.stringify([...removidos].sort());
+
+    return `${produtoId}-${extasString}-${removidoString}`
+  }
 
   return (
     <section className="overflow-hidden bg-zinc-950 h-screen pt-4 flex">
@@ -151,6 +158,7 @@ export default function Home() {
         {isFinalizarAberto && (
           <CarrinhoModal 
             itens={carrinho}
+            editarProduto={editarProduto}
             fechar={() => setIsFinalizarAberto(false)}
             remover={aoClicarEmExcluirProdutoCarrinho}
             total={valorTotal}
@@ -160,6 +168,8 @@ export default function Home() {
 
         {produtoEmEdicao && (
           <CustomizacaoPizzaModal
+            key={('cartId' in produtoEmEdicao ? produtoEmEdicao.cartId : produtoEmEdicao.id)}
+            gerarCartId={gerarCartId}
             adicionarAoCarrinho={adicionarAoCarrinho}
             fecharModal={() => setProdutoEmEdicao(null)}
             produto={produtoEmEdicao}
@@ -178,6 +188,7 @@ export default function Home() {
 
         {produtoARetirarCarrinho && (
           <SelecionarQuantidadeExclusaoModal
+            setProdutoARetirarCarrinho={setProdutoARetirarCarrinho}
             produtoARetirarCarrinho={produtoARetirarCarrinho}
             confirmar={retirarProdutoCarrinhoSegundoQuantidade}
           />

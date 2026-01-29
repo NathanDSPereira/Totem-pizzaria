@@ -4,9 +4,9 @@ import { ItemCarrinho } from "@/interface/ItemCarrinho";
 import { Pizza } from "@/interface/Pizza"
 
 import Image from "next/image"
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIngredientes, adicionarAoCarrinho}: {produto: Pizza, fecharModal: () => void, todosOsIngredientes: Ingredientes[], adicionarAoCarrinho: (pizza: Pizza | ItemCarrinho) => void}) {
+export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIngredientes, adicionarAoCarrinho, gerarCartId}: {produto: Pizza | ItemCarrinho, fecharModal: () => void, todosOsIngredientes: Ingredientes[], adicionarAoCarrinho: (pizza: Pizza | ItemCarrinho) => void, gerarCartId: (produtoId: string, extras: Record<number, number>, removidos: number[]) => string}) {
 
     const ingredientesQuePodemRemover = todosOsIngredientes.filter((ing) => 
         produto.ingredientesIds?.includes(ing.id) && ing.podeRemover
@@ -16,9 +16,13 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
         ing.podeAdicionar
     )
 
-    const [ingredientesRemovidos, setIngredientesRemovidos] = useState<number[]>([]);
-    const [ingredientesExtras, setIngredientesExtras] = useState<Record<string, number>>({})
+    const [ingredientesRemovidos, setIngredientesRemovidos] = useState<number[]>(() => {
+        return ('removidos' in produto) ? produto.removidos : [];
+    });
 
+    const [ingredientesExtras, setIngredientesExtras] = useState<Record<string, number>>(() => {
+        return ('extras' in produto) ? produto.extras : {};
+    })
 
     const removerIngrediente = (id: number) => {
         setIngredientesRemovidos((ingredientesAnteriores) => {
@@ -76,8 +80,7 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
     }, [ingredientesExtras, ingredientesRemovidos, todosOsIngredientes]);
 
     const adicionarPizzaPersonalizada = () => {
-        const timeStamp = new Date().getTime()
-        const idUnico = `${produto.id}-${timeStamp}`
+        const idUnico = gerarCartId(produto.id, ingredientesExtras, ingredientesRemovidos)
 
         const pizzaModificada : ItemCarrinho = {
             ...produto,
