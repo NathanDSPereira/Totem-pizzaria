@@ -18,7 +18,7 @@ export default function CarrinhoModal({itens, fechar, remover, total, todosOsIng
                     {itens.map((item) => (
                         <li key={item.id} className="border-b border-zinc-900">
                             <CarrinhoItemCard
-                                key={item.id}
+                                key={item.categoriaId}
                                 editarProduto={editarProduto}
                                 carrinhoItem={item} 
                                 remover={remover} 

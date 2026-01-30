@@ -4,9 +4,9 @@ import { ItemCarrinho } from "@/interface/ItemCarrinho";
 import { Pizza } from "@/interface/Pizza"
 
 import Image from "next/image"
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIngredientes, adicionarAoCarrinho, gerarCartId}: {produto: Pizza | ItemCarrinho, fecharModal: () => void, todosOsIngredientes: Ingredientes[], adicionarAoCarrinho: (pizza: Pizza | ItemCarrinho) => void, gerarCartId: (produtoId: string, extras: Record<number, number>, removidos: number[]) => string}) {
+export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIngredientes, adicionarAoCarrinho, gerarCartId}: {produto: Pizza | ItemCarrinho, fecharModal: () => void, todosOsIngredientes: Ingredientes[], adicionarAoCarrinho: (pizza: Pizza | ItemCarrinho, cartIdAntigo?: string) => void, gerarCartId: (produtoId: string, extras: Record<number, number>, removidos: number[]) => string}) {
 
     const ingredientesQuePodemRemover = todosOsIngredientes.filter((ing) => 
         produto.ingredientesIds?.includes(ing.id) && ing.podeRemover
@@ -82,16 +82,18 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
     const adicionarPizzaPersonalizada = () => {
         const idUnico = gerarCartId(produto.id, ingredientesExtras, ingredientesRemovidos)
 
+        const cartIdAntigo = ('cartId' in produto) ? produto.cartId : undefined;
+
         const pizzaModificada : ItemCarrinho = {
             ...produto,
             cartId: idUnico,
             precoTotal: precoProdutoFinal,
             removidos: ingredientesRemovidos,
             extras: ingredientesExtras,
-            quantidadeCarrinho: 1
+            quantidadeCarrinho: ('quantidadeCarrinho' in produto) ? produto.quantidadeCarrinho : 1
         }
 
-        adicionarAoCarrinho(pizzaModificada)
+        adicionarAoCarrinho(pizzaModificada, cartIdAntigo)
         fecharModal();
     }
 
@@ -136,20 +138,38 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                         <div className="flex justify-center items-center">
                             <h4 className="text-slate-200 text-xl font-bold uppercase mb-11 tracking-widest">Ingredientes Padrão</h4>
                         </div>
-                        {ingredientesQuePodemRemover.map((ing) => (
-                            <li key={ing.id} className="bg-zinc-900/50 border border-zinc-800 p-5 rounded-3xl flex justify-between items-center shadow-lg">
-                                <p className="text-slate-50 text-xl font-bold italic uppercase">{ing.nome}</p>
-                                
-                                <div className="flex items-center gap-8">
-                                    <button onClick={() => removerIngrediente(ing.id)} className="text-center w-32 h-16 rounded-xl active:scale-95 font-semibold bg-zinc-800 flex items-center justify-center text-2xl text-zinc-200 transition-all">
-                                        Remover
-                                    </button>
-                                    <button onClick={() => manterIngrediente(ing.id)} className="text-center w-32 h-16 rounded-xl active:scale-95 bg-amber-600 flex items-center justify-center text-2xl text-zinc-950 font-semibold">
-                                        Manter
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
+                        {ingredientesQuePodemRemover.map((ing) => {
+                            const itemRemovido = ingredientesRemovidos.includes(ing.id)
+                            
+                            return (
+                                <li key={ing.id} className="bg-zinc-900/50 border border-zinc-800 p-5 rounded-3xl flex justify-between items-center shadow-lg">
+                                    <p className="text-slate-50 text-xl font-bold italic uppercase">{ing.nome}</p>
+                                    
+                                    <div className="flex items-center gap-8">
+                                        <button 
+                                            disabled={itemRemovido}
+                                            onClick={() => removerIngrediente(ing.id)} 
+                                            className={`text-center w-32 h-16 rounded-xl active:scale-95 font-semibold flex items-center justify-center text-2xl transition-all 
+                                                    ${itemRemovido ? 
+                                                        'bg-red-950/30 text-zinc-700 cursor-not-allowed' : 
+                                                        'bg-zinc-800 text-zinc-200'
+                                                    }`}>
+                                            Remover
+                                        </button>
+                                        <button 
+                                            disabled={!itemRemovido}
+                                            onClick={() => manterIngrediente(ing.id)} 
+                                            className={`text-center w-32 h-16 rounded-xl active:scale-95 flex items-center justify-center text-2xl font-semibold transition-all
+                                                ${!itemRemovido ?
+                                                        'bg-red-950/30 text-zinc-700 cursor-not-allowed' : 
+                                                        'bg-amber-600 text-zinc-950 '
+                                                }`}>
+                                            Manter
+                                        </button>
+                                    </div>
+                                </li>
+                            )
+                        })}
                     </ul>
 
                     <ul className="flex-1 flex flex-col gap-4 mb-10">
@@ -173,13 +193,13 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                                         <button 
                                             disabled={itemRemovido || quantidadeExtra === 0}
                                             onClick={() => diminuirExtra(ing.id)}
-                                            className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center text-4xl text-zinc-400 hover:bg-red-500/20 hover:text-red-500 transition-all">
+                                            className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center text-4xl text-zinc-400 active:scale-90 transition-all">
                                             −
                                         </button>
                                         <p className="text-slate-100 text-3xl font-black">{quantidadeExtra}</p>
                                         <button
                                             onClick={() => adicionarExtra(ing.id)}
-                                            className="w-16 h-16 rounded-2xl bg-amber-600 flex items-center justify-center text-4xl text-zinc-950 font-bold">
+                                            className="w-16 h-16 rounded-2xl bg-amber-600 flex items-center justify-center text-4xl text-zinc-950 font-bold active:scale-90 transition-all">
                                             +
                                         </button>
                                     </div>
@@ -193,16 +213,18 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
                             onClick={adicionarPizzaPersonalizada}
                             className="mt-10 bg-amber-600 h-30 p-10 rounded-3xl max-w-4/5 flex justify-between w-full items-center active:scale-95 transition-all">
                             <p className="text-zinc-950 text-3xl font-black uppercase italic">Adicionar por</p>
-                            <p className="text-zinc-950 text-3xl font-black">R$ {valorTotalExtra.toFixed(2).replace('.', ',')}</p>
+                            <p className="text-zinc-950 text-3xl font-black">
+                                R$ {precoProdutoFinal.toFixed(2).replace('.', ',')}
+                            </p>
                         </button>
                     </div>
                     
                     <div className="flex gap-4 items-center justify-end mt-15">
                         <p className="text-slate-300 text-2xl font-black">
-                            Preço total:
+                            Preço extras:
                         </p>
                         <p className="text-slate-300 text-3xl font-black">
-                            R$ {precoProdutoFinal.toFixed(2).replace('.', ',')}
+                            R$ {valorTotalExtra.toFixed(2).replace('.', ',')}
                         </p>
                     </div>
                 </div>

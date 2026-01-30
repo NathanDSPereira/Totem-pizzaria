@@ -90,8 +90,12 @@ export default function Home() {
     setProdutoARetirarCarrinho(null);
   }
 
-  const adicionarAoCarrinho = (produto: Pizza | ItemCarrinho) => {
+  const adicionarAoCarrinho = (produto: Pizza | ItemCarrinho, cartIdAntigo?: string) => {
     setCarrinho((itensAtuais : ItemCarrinho[]) => {
+
+      const listaFiltrada = cartIdAntigo ? 
+        itensAtuais.filter((item) => item.cartId !== cartIdAntigo) : 
+        itensAtuais
 
       const novoItem: ItemCarrinho = ('cartId' in produto) 
         ? produto 
@@ -104,20 +108,20 @@ export default function Home() {
             quantidadeCarrinho: 1
       }
 
-      const itemExiste = itensAtuais.find((anterior) => 
+      const itemExiste = listaFiltrada.find((anterior) => 
         anterior.id === novoItem.id &&
         JSON.stringify(anterior.removidos) === JSON.stringify(novoItem.removidos) &&
         JSON.stringify(anterior.extras) === JSON.stringify(novoItem.extras)
       );
 
       if(itemExiste) {
-        return itensAtuais.map((item) =>
+        return listaFiltrada.map((item) =>
           item.cartId === itemExiste.cartId 
           ? {...item, quantidadeCarrinho: (item.quantidadeCarrinho || 0) + 1} : item
         )
       }
 
-      return [...itensAtuais, novoItem]
+      return [...listaFiltrada, novoItem]
     })
   }
 

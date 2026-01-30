@@ -41,7 +41,9 @@ export default function CarrinhoItemCard({carrinhoItem, remover, todosOsIngredie
                 <p className="text-orange-500 font-bold text-xl">R$ {(carrinhoItem.precoTotal * carrinhoItem.quantidadeCarrinho).toFixed(2).replace('.', ',')}</p>
             </div>
             <button 
-                onClick={() => remover(carrinhoItem)}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    remover(carrinhoItem)}}
                 className="bg-red-500/10 text-red-500 p-3 rounded-xl hover:bg-red-500 transition-colors"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
