@@ -16,9 +16,9 @@ export default function CarrinhoModal({itens, fechar, remover, total, todosOsIng
 
                 <ul className="flex-1 overflow-y-auto flex flex-col gap-6 custom-scrollbar pb-10">
                     {itens.map((item) => (
-                        <li key={item.id} className="border-b border-zinc-900">
+                        <li key={item.cartId} className="border-b border-zinc-900">
                             <CarrinhoItemCard
-                                key={item.categoriaId}
+                                key={item.cartId}
                                 editarProduto={editarProduto}
                                 carrinhoItem={item} 
                                 remover={remover} 

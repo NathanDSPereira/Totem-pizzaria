@@ -25,6 +25,12 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
     })
 
     const removerIngrediente = (id: number) => {
+        setIngredientesExtras((itens) => {
+            const novoEstado = {...itens};
+            delete novoEstado[id];
+            return novoEstado;
+        })
+
         setIngredientesRemovidos((ingredientesAnteriores) => {
             if(ingredientesAnteriores.includes(id)) return ingredientesAnteriores
             return [...ingredientesAnteriores, id]
@@ -38,6 +44,9 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
     }
 
     const adicionarExtra = ((id: number) => {
+
+        manterIngrediente(id)
+
         setIngredientesExtras((anteriores) => ({
             ...anteriores,
             [id] : (anteriores[id] || 0) + 1
