@@ -13,7 +13,7 @@ import BdIngredientes from '@/bancoDeDados/BdIngredientes.json'
 import { Pizza } from '@/interface/Pizza';
 import { ItemCarrinho } from '@/interface/ItemCarrinho';
 
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import SelecionarQuantidadeExclusaoModal from '@/components/SelecionarQuantidadeExclusaoModal';
 
 
@@ -42,7 +42,14 @@ export default function Home() {
 
   const [categoriaAtiva, setCategoriaAtiva] = useState('pizzas-salgadas');
   const [categoriaNome, setCategoriaNomeAtivo] = useState('Pizzas Salgadas')
-  const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]);
+  const [carrinho, setCarrinho] = useState<ItemCarrinho[]>(() => {
+    if (typeof window !== 'undefined') {
+      const carrinhoSalvo = localStorage.getItem('carrinho');
+      return carrinhoSalvo ? JSON.parse(carrinhoSalvo) : [];
+    }
+    return [];
+  });
+
   const [isFinalizarAberto, setIsFinalizarAberto] = useState(false);
   const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null | ItemCarrinho>(null);
   const [produtoARetirarCarrinho, setProdutoARetirarCarrinho] = useState<ItemCarrinho | null>(null);
@@ -51,7 +58,9 @@ export default function Home() {
   const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.precoTotal * item.quantidadeCarrinho), 0)
   const quantidadeTotal = carrinho.reduce((acumulador, item) => acumulador + item.quantidadeCarrinho, 0)
 
-
+    useEffect(() => {
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    }, [carrinho]);
 
   const editarProduto = (produto: Pizza) => {
     setProdutoEmEdicao(produto);
