@@ -1,7 +1,7 @@
 import { Pizza } from "@/interface/Pizza";
 import Image from "next/image";
 
-export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProduto, mostrarToast }: { pizzaCard: Pizza, adicionarAoCarrinho: (pizza: Pizza) => void, editarProduto: (pizza: Pizza) => void, mostrarToast: (message: string) => void }) {
+export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProduto}: { pizzaCard: Pizza, adicionarAoCarrinho: (pizza: Pizza) => void, editarProduto: (pizza: Pizza) => void}) {
   return (
     <div
         onClick={() => editarProduto(pizzaCard)} 
@@ -32,7 +32,6 @@ export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProdut
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
-                        mostrarToast(`${pizzaCard.nome} adicionada ao carrinho!`);
                         adicionarAoCarrinho(pizzaCard)
                     }}
                     className="bg-amber-600 active:scale-90 hover:bg-amber-500 w-16 h-14 flex items-center justify-center text-zinc-950 rounded-2xl transition-all shadow-[0_0_20px_rgba(217,119,6,0.2)]">

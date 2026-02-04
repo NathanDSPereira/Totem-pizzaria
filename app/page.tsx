@@ -13,7 +13,7 @@ import BdIngredientes from '@/bancoDeDados/BdIngredientes.json'
 import { Pizza } from '@/interface/Pizza';
 import { ItemCarrinho } from '@/interface/ItemCarrinho';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SelecionarQuantidadeExclusaoModal from '@/components/SelecionarQuantidadeExclusaoModal';
 import Toast from '@/components/Toast';
 
@@ -59,6 +59,8 @@ export default function Home() {
   const produtosFiltrados = listaPizzas.filter((produto) => produto.categoriaId == categoriaAtiva);
   const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.precoTotal * item.quantidadeCarrinho), 0)
   const quantidadeTotal = carrinho.reduce((acumulador, item) => acumulador + item.quantidadeCarrinho, 0)
+
+  const toastTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
       localStorage.setItem('carrinho', JSON.stringify(carrinho));
@@ -132,6 +134,8 @@ export default function Home() {
         )
       }
 
+      mostrarToast(`${produto.nome} adicionada ao carrinho!`);
+
       return [...listaFiltrada, novoItem]
     })
   }
@@ -148,10 +152,15 @@ export default function Home() {
     return `${produtoId}-${extasString}-${removidoString}`
   }
 
-  const mostrarToast = (message: string) => {
+  const mostrarToast = (message: string) => { 
+    
+    if(toastTimerRef.current) {
+      clearTimeout(toastTimerRef.current);
+    }
+    
     setToast({message, visible: true});
 
-    setTimeout(() => {
+    toastTimerRef.current = setTimeout(() => {
       setToast((anteriores) => ({...anteriores, visible: false}));
     }, 3000);
   }
@@ -176,7 +185,6 @@ export default function Home() {
           adicionarAoCarrinho={adicionarAoCarrinho}
           abrirCustomizacao={editarProduto}
           categoriaNome={categoriaNome}
-          mostrarToast={mostrarToast}
         />
 
         {isFinalizarAberto && (
