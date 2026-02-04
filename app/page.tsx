@@ -13,8 +13,9 @@ import BdIngredientes from '@/bancoDeDados/BdIngredientes.json'
 import { Pizza } from '@/interface/Pizza';
 import { ItemCarrinho } from '@/interface/ItemCarrinho';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SelecionarQuantidadeExclusaoModal from '@/components/SelecionarQuantidadeExclusaoModal';
+import Toast from '@/components/Toast';
 
 
 export default function Home() {
@@ -53,6 +54,7 @@ export default function Home() {
   const [isFinalizarAberto, setIsFinalizarAberto] = useState(false);
   const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null | ItemCarrinho>(null);
   const [produtoARetirarCarrinho, setProdutoARetirarCarrinho] = useState<ItemCarrinho | null>(null);
+  const [toast, setToast] = useState<{message: string; visible: boolean}>({message: '', visible: false});
 
   const produtosFiltrados = listaPizzas.filter((produto) => produto.categoriaId == categoriaAtiva);
   const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.precoTotal * item.quantidadeCarrinho), 0)
@@ -146,6 +148,14 @@ export default function Home() {
     return `${produtoId}-${extasString}-${removidoString}`
   }
 
+  const mostrarToast = (message: string) => {
+    setToast({message, visible: true});
+
+    setTimeout(() => {
+      setToast((anteriores) => ({...anteriores, visible: false}));
+    }, 3000);
+  }
+
   return (
     <section className="overflow-hidden bg-zinc-950 h-screen pt-4 flex">
 
@@ -166,6 +176,7 @@ export default function Home() {
           adicionarAoCarrinho={adicionarAoCarrinho}
           abrirCustomizacao={editarProduto}
           categoriaNome={categoriaNome}
+          mostrarToast={mostrarToast}
         />
 
         {isFinalizarAberto && (
@@ -187,6 +198,7 @@ export default function Home() {
             fecharModal={() => setProdutoEmEdicao(null)}
             produto={produtoEmEdicao}
             todosOsIngredientes={listIngredientes}
+            mostrarToast={mostrarToast}
           />
         )}
       </main>
@@ -206,6 +218,8 @@ export default function Home() {
             confirmar={retirarProdutoCarrinhoSegundoQuantidade}
           />
         )}
+
+      <Toast toast={toast} />
     </section>
   );
 }

@@ -6,7 +6,20 @@ import { Pizza } from "@/interface/Pizza"
 import Image from "next/image"
 import { useMemo, useState } from "react";
 
-export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIngredientes, adicionarAoCarrinho, gerarCartId}: {produto: Pizza | ItemCarrinho, fecharModal: () => void, todosOsIngredientes: Ingredientes[], adicionarAoCarrinho: (pizza: Pizza | ItemCarrinho, cartIdAntigo?: string) => void, gerarCartId: (produtoId: string, extras: Record<number, number>, removidos: number[]) => string}) {
+export default function CustomizacaoPizzaModal({
+    produto, 
+    fecharModal, 
+    todosOsIngredientes, 
+    adicionarAoCarrinho, 
+    gerarCartId, 
+    mostrarToast
+}: {
+    produto: Pizza | ItemCarrinho, 
+    fecharModal: () => void, todosOsIngredientes: Ingredientes[], 
+    adicionarAoCarrinho: (pizza: Pizza | ItemCarrinho, cartIdAntigo?: string) => void, 
+    gerarCartId: (produtoId: string, extras: Record<number, number>, removidos: number[]) => string, 
+    mostrarToast: (message: string) => void
+}) {
 
     const ingredientesQuePodemRemover = todosOsIngredientes.filter((ing) => 
         produto.ingredientesIds?.includes(ing.id) && ing.podeRemover
@@ -103,6 +116,7 @@ export default function CustomizacaoPizzaModal({produto, fecharModal, todosOsIng
         }
 
         adicionarAoCarrinho(pizzaModificada, cartIdAntigo)
+        mostrarToast(`${produto.nome} adicionada ao carrinho!`);
         fecharModal();
     }
 

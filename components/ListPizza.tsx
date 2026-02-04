@@ -1,7 +1,7 @@
 import PizzaCard from "./PizzaCard";
 import { Pizza } from "@/interface/Pizza";
 
-export default function ListPizza({listaPizzas, adicionarAoCarrinho, abrirCustomizacao, categoriaNome}: { listaPizzas: Pizza[], adicionarAoCarrinho: (produto: Pizza) => void, abrirCustomizacao: (produto: Pizza) => void, categoriaNome: string}) {
+export default function ListPizza({listaPizzas, adicionarAoCarrinho, abrirCustomizacao, categoriaNome, mostrarToast}: { listaPizzas: Pizza[], adicionarAoCarrinho: (produto: Pizza) => void, abrirCustomizacao: (produto: Pizza) => void, categoriaNome: string, mostrarToast: (message: string) => void}) {
     return (
         <section className="bg-zinc-950 mx-auto flex justify-center flex-wrap pt-5">
             <div className="text-slate-100 text-5xl text-center font-bold tracking-wide mb-5">
@@ -17,6 +17,7 @@ export default function ListPizza({listaPizzas, adicionarAoCarrinho, abrirCustom
                             pizzaCard={pizza} 
                             adicionarAoCarrinho={adicionarAoCarrinho} 
                             editarProduto={abrirCustomizacao}
+                            mostrarToast={mostrarToast}
                         />
                     </li>
                 ))}
