@@ -54,7 +54,15 @@ export default function Home() {
   const [isFinalizarAberto, setIsFinalizarAberto] = useState(false);
   const [produtoEmEdicao, setProdutoEmEdicao] = useState<Pizza | null | ItemCarrinho>(null);
   const [produtoARetirarCarrinho, setProdutoARetirarCarrinho] = useState<ItemCarrinho | null>(null);
-  const [toast, setToast] = useState<{message: string; visible: boolean}>({message: '', visible: false});
+  const [toast, setToast] = useState<{message: string; visible: boolean, id: number, type: string}>(
+    {
+      message: '', 
+      visible: false, 
+      id: 0,
+      type: 'success'
+    }
+  
+  );
 
   const produtosFiltrados = listaPizzas.filter((produto) => produto.categoriaId == categoriaAtiva);
   const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.precoTotal * item.quantidadeCarrinho), 0)
@@ -81,6 +89,7 @@ export default function Home() {
       setProdutoARetirarCarrinho(produto);
     } else {
       removerItemCarrinho(produto.cartId)
+      mostrarToast(`${produto.nome} removida do carrinho!`, 'error');
     }
   }
 
@@ -100,11 +109,16 @@ export default function Home() {
       })
       return listaAtualizada.filter((item): item is ItemCarrinho => item !== null)
     })
+    
+    mostrarToast(`${produtoARetirarCarrinho?.nome} removida do carrinho!`, 'error');
     setProdutoARetirarCarrinho(null);
   }
 
   const adicionarAoCarrinho = (produto: Pizza | ItemCarrinho, cartIdAntigo?: string) => {
     setCarrinho((itensAtuais : ItemCarrinho[]) => {
+
+      const tipoMensagem = cartIdAntigo ? 'info' : 'success';
+      const mensagemToast = cartIdAntigo ? 'atualizada com sucesso!' : 'adicionada ao carrinho!';
 
       const listaFiltrada = cartIdAntigo ? 
         itensAtuais.filter((item) => item.cartId !== cartIdAntigo) : 
@@ -128,13 +142,14 @@ export default function Home() {
       );
 
       if(itemExiste) {
+        mostrarToast(`${produto.nome} ${mensagemToast}`, tipoMensagem);
         return listaFiltrada.map((item) =>
           item.cartId === itemExiste.cartId 
           ? {...item, quantidadeCarrinho: (item.quantidadeCarrinho || 0) + 1} : item
         )
       }
 
-      mostrarToast(`${produto.nome} adicionada ao carrinho!`);
+      mostrarToast(`${produto.nome} ${mensagemToast}`, tipoMensagem);
 
       return [...listaFiltrada, novoItem]
     })
@@ -152,17 +167,28 @@ export default function Home() {
     return `${produtoId}-${extasString}-${removidoString}`
   }
 
-  const mostrarToast = (message: string) => { 
-    
-    if(toastTimerRef.current) {
+  const mostrarToast = (message: string, type: string) => {
+    if (toastTimerRef.current) {
       clearTimeout(toastTimerRef.current);
     }
-    
-    setToast({message, visible: true});
 
-    toastTimerRef.current = setTimeout(() => {
-      setToast((anteriores) => ({...anteriores, visible: false}));
-    }, 3000);
+    setToast((anteriores) => ({...anteriores, visible: false}));
+
+    setTimeout(() => {
+      setToast(
+        {
+          message, 
+          visible: true, 
+          id: Date.now(),
+          type
+        }
+      );
+
+      toastTimerRef.current = setTimeout(() => {
+        setToast((anteriores) => ({...anteriores, visible: false}));
+        toastTimerRef.current = null;
+      }, 3000);
+    }, 10);
   }
 
   return (
@@ -206,7 +232,6 @@ export default function Home() {
             fecharModal={() => setProdutoEmEdicao(null)}
             produto={produtoEmEdicao}
             todosOsIngredientes={listIngredientes}
-            mostrarToast={mostrarToast}
           />
         )}
       </main>

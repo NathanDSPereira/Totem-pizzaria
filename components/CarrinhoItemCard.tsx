@@ -17,8 +17,11 @@ export default function CarrinhoItemCard({carrinhoItem, remover, todosOsIngredie
 
     return (
         <div
-            onClick={() => editarProduto(carrinhoItem)} 
-            key={carrinhoItem.id} className="flex justify-between items-center border-b border-zinc-900 pb-6">
+            onClick={() => 
+                editarProduto(carrinhoItem)} 
+                key={carrinhoItem.id} 
+                className="flex justify-between items-center border-b border-zinc-900 pb-6"
+        >    
             <div className="flex flex-col">
                 <p className="text-slate-100 font-bold text-xl">{carrinhoItem.quantidadeCarrinho} x {carrinhoItem.nome}
                 </p>

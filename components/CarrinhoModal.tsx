@@ -14,19 +14,28 @@ export default function CarrinhoModal({itens, fechar, remover, total, todosOsIng
                     </button>
                 </div>
 
-                <ul className="flex-1 overflow-y-auto flex flex-col gap-6 custom-scrollbar pb-10">
-                    {itens.map((item) => (
-                        <li key={item.cartId} className="border-b border-zinc-900">
-                            <CarrinhoItemCard
-                                key={item.cartId}
-                                editarProduto={editarProduto}
-                                carrinhoItem={item} 
-                                remover={remover} 
-                                todosOsIngredientes={todosOsIngredientes}
-                            />
-                        </li>
-                    ))}
-                </ul>
+
+                {itens.length === 0 && (
+                    <div className="flex-1 flex items-center justify-center">
+                        <p className="text-zinc-500 text-xl font-bold">Que tal adicionar uma pizza?</p>
+                    </div>
+                )} 
+                
+                {itens.length > 0 && (
+                    <ul className="flex-1 overflow-y-auto flex flex-col gap-6 custom-scrollbar pb-10">
+                        {itens.map((item) => (
+                            <li key={item.cartId} className="border-b border-zinc-900">
+                                <CarrinhoItemCard
+                                    key={item.cartId}
+                                    editarProduto={editarProduto}
+                                    carrinhoItem={item} 
+                                    remover={remover} 
+                                    todosOsIngredientes={todosOsIngredientes}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                )}
 
                 <div className="mt-auto pt-8 border-t border-zinc-800">
                     <div className="flex justify-between items-center mb-8">

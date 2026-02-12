@@ -12,13 +12,11 @@ export default function CustomizacaoPizzaModal({
     todosOsIngredientes, 
     adicionarAoCarrinho, 
     gerarCartId, 
-    mostrarToast
 }: {
     produto: Pizza | ItemCarrinho, 
     fecharModal: () => void, todosOsIngredientes: Ingredientes[], 
     adicionarAoCarrinho: (pizza: Pizza | ItemCarrinho, cartIdAntigo?: string) => void, 
     gerarCartId: (produtoId: string, extras: Record<number, number>, removidos: number[]) => string, 
-    mostrarToast: (message: string) => void
 }) {
 
     const ingredientesQuePodemRemover = todosOsIngredientes.filter((ing) => 
@@ -115,8 +113,7 @@ export default function CustomizacaoPizzaModal({
             quantidadeCarrinho: ('quantidadeCarrinho' in produto) ? produto.quantidadeCarrinho : 1
         }
 
-        adicionarAoCarrinho(pizzaModificada, cartIdAntigo)
-        mostrarToast(`${produto.nome} adicionada ao carrinho!`);
+        adicionarAoCarrinho(pizzaModificada, cartIdAntigo)        
         fecharModal();
     }
 
