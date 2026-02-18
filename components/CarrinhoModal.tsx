@@ -43,7 +43,13 @@ export default function CarrinhoModal({itens, fechar, remover, total, todosOsIng
                         <p className=" text-slate-50 text-4xl font-black">R$ {total.toFixed(2).replace('.', ',')}</p>
                     </div>
                     
-                    <button className="w-full bg-amber-600 text-black font-black py-6 rounded-2xl text-2xl uppercase shadow-lg shadow-amber-900/20 active:scale-95 transition-all">
+                    <button 
+                        disabled={itens.length === 0}
+                        className={`w-full font-black py-6 rounded-2xl text-2xl uppercase shadow-lg transition-all 
+                            ${itens.length === 0 
+                                ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed opacity-50 shadow-none' 
+                                : 'bg-amber-600 text-black shadow-amber-900/20 active:scale-95'}
+                            `}>
                         Confirmar e Pagar
                     </button>
                 </div>
