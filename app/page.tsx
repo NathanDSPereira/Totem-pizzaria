@@ -5,6 +5,8 @@ import ListCategorias from '@/components/ListCategorias';
 import Footer from '@/components/FooterPage';
 import CarrinhoModal from '@/components/CarrinhoModal';
 import CustomizacaoPizzaModal from '@/components/CustomizacaoPizzaModal';
+import SelecionarQuantidadeExclusaoModal from '@/components/SelecionarQuantidadeExclusaoModal';
+import LocalConsumoModal from '@/components/LocalConsumoModal';
 
 import BdPizzas from '@/bancoDeDados/BdPizzas.json';
 import BdCategorias from '@/bancoDeDados/BdCategorias.json';
@@ -12,9 +14,9 @@ import BdIngredientes from '@/bancoDeDados/BdIngredientes.json'
 
 import { Pizza } from '@/interface/Pizza';
 import { ItemCarrinho } from '@/interface/ItemCarrinho';
+import { PedidoFinal } from '@/interface/PedidoFinal';
 
 import { useEffect, useRef, useState } from 'react';
-import SelecionarQuantidadeExclusaoModal from '@/components/SelecionarQuantidadeExclusaoModal';
 import Toast from '@/components/Toast';
 
 
@@ -63,17 +65,28 @@ export default function Home() {
     }
   
   );
+  const [dadosPedidoFinal, setDadosPedidoFinal] = useState<{
+    localConsumo: '';
+    cliente: '';
+    metodoPagamento: '';
+  } | null>
+  (null);
+
+  const [etapaFinalizacao, setEtapaFinalizacao] = useState<number>(0);
+
+  // 1 - consumo, 2 - cliente, 3 - pagamento, 4 - resumo
 
   const produtosFiltrados = listaPizzas.filter((produto) => produto.categoriaId == categoriaAtiva);
   const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.precoTotal * item.quantidadeCarrinho), 0)
   const quantidadeTotal = carrinho.reduce((acumulador, item) => acumulador + item.quantidadeCarrinho, 0)
 
+  
   const toastTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-    useEffect(() => {
-      localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    }, [carrinho]);
-
+  
+  useEffect(() => {
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  }, [carrinho]);
+  
   const editarProduto = (produto: Pizza) => {
     setProdutoEmEdicao(produto);
   }
@@ -191,6 +204,19 @@ export default function Home() {
     }, 10);
   }
 
+  const avancarEtapaFinalizacao = () => {
+    setEtapaFinalizacao((anterior) => anterior + 1);
+  }
+
+  const voltarEtapaFinalizacao = () => {
+    setEtapaFinalizacao((anterior) => anterior - 1);
+  }
+
+  const cancelarFinalizacao = () => {
+    setEtapaFinalizacao(0);
+    setDadosPedidoFinal(null);
+  }
+    
   return (
     <section className="overflow-hidden bg-zinc-950 h-screen pt-4 flex">
 
@@ -221,6 +247,7 @@ export default function Home() {
             remover={aoClicarEmExcluirProdutoCarrinho}
             total={valorTotal}
             todosOsIngredientes={listIngredientes}
+            avancarEtapa={avancarEtapaFinalizacao}
           />
         )}
 
@@ -232,6 +259,12 @@ export default function Home() {
             fecharModal={() => setProdutoEmEdicao(null)}
             produto={produtoEmEdicao}
             todosOsIngredientes={listIngredientes}
+          />
+        )}
+
+        {etapaFinalizacao === 1 && (
+          <LocalConsumoModal 
+            fechar={cancelarFinalizacao}
           />
         )}
       </main>
