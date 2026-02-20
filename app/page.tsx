@@ -65,16 +65,20 @@ export default function Home() {
     }
   
   );
-  const [dadosPedidoFinal, setDadosPedidoFinal] = useState<{
-    localConsumo: '';
-    cliente: '';
-    metodoPagamento: '';
-  } | null>
-  (null);
+
+  const [dadosPedidoFinal, setDadosPedidoFinal] = useState<PedidoFinal>({
+    localConsumo: "local",
+    cliente: "",
+    metodoPagamento: "",
+    produtos: [],
+    valorTotal: 0,
+    numeroPedido: "",
+  })
 
   const [etapaFinalizacao, setEtapaFinalizacao] = useState<number>(0);
 
   // 1 - consumo, 2 - cliente, 3 - pagamento, 4 - resumo
+
 
   const produtosFiltrados = listaPizzas.filter((produto) => produto.categoriaId == categoriaAtiva);
   const valorTotal = carrinho.reduce((acumulador, item) => acumulador + (item.precoTotal * item.quantidadeCarrinho), 0)
@@ -213,8 +217,34 @@ export default function Home() {
   }
 
   const cancelarFinalizacao = () => {
+    setDadosPedidoFinal({
+      localConsumo: "local",
+      cliente: "",
+      metodoPagamento: "",
+      produtos: [],
+      valorTotal: 0,
+      numeroPedido: "",
+    });
+    
     setEtapaFinalizacao(0);
-    setDadosPedidoFinal(null);
+  }
+
+  const confirmarLocalConsumo = (local: 'local' | 'viagem') => {
+    setDadosPedidoFinal((anteriores) => ({...anteriores, localConsumo: local})); 
+    avancarEtapaFinalizacao();
+  }
+
+  const iniciarFinalizacao = () => {
+    setDadosPedidoFinal((anteriores) => {
+      return {
+        ...anteriores,
+        produtos: carrinho,
+        valorTotal: valorTotal,
+        numeroPedido: `PED-${Math.floor(Math.random() * 9000).toString().padStart(4, '0')}`
+      }
+    });
+
+    avancarEtapaFinalizacao();
   }
     
   return (
@@ -247,7 +277,7 @@ export default function Home() {
             remover={aoClicarEmExcluirProdutoCarrinho}
             total={valorTotal}
             todosOsIngredientes={listIngredientes}
-            avancarEtapa={avancarEtapaFinalizacao}
+            iniciarFinalizacao={iniciarFinalizacao}
           />
         )}
 
@@ -265,6 +295,7 @@ export default function Home() {
         {etapaFinalizacao === 1 && (
           <LocalConsumoModal 
             fechar={cancelarFinalizacao}
+            selecionarLocalConsumo={confirmarLocalConsumo}
           />
         )}
       </main>

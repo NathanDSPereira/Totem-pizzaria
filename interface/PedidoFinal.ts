@@ -1,7 +1,7 @@
 import { ItemCarrinho } from "./ItemCarrinho";
 
 export interface PedidoFinal {
-  localConsumo: string;
+  localConsumo: "local" | "viagem";
   cliente: string;
   metodoPagamento: string;
   produtos: ItemCarrinho[];
