@@ -22,22 +22,22 @@ export default function CarrinhoItemCard({carrinhoItem, remover, todosOsIngredie
                 key={carrinhoItem.id} 
                 className="flex justify-between items-center border-b border-zinc-900 pb-6"
         >    
-            <div className="flex flex-col">
-                <p className="text-slate-100 font-bold text-xl">{carrinhoItem.quantidadeCarrinho} x {carrinhoItem.nome}
+            <div className="flex flex-col gap-1">
+                <p className="text-slate-100 font-bold text-2xl">{carrinhoItem.quantidadeCarrinho} x {carrinhoItem.nome}
                 </p>
                 {temModificacao ? (
                     <div className="italic mt-1 mb-2">
                         {nomeIngredientesRemovidos.length > 0 && (
-                            <span className="text-slate-400 block">Sem: {nomeIngredientesRemovidos.join(', ')}
+                            <span className="text-slate-400 text-lg block">Sem: {nomeIngredientesRemovidos.join(', ')}
                             </span>
                         )}
                         {nomeIngredientesExtras.length > 0 && (
-                            <span className="text-slate-400 block">Extras: {nomeIngredientesExtras.join(', ')}
+                            <span className="text-slate-400 text-lg block">Extras: {nomeIngredientesExtras.join(', ')}
                             </span>
                         )}
                     </div>
                 ) : (
-                    <span className="text-zinc-500 italic block">Receita Original</span>
+                    <span className="text-zinc-500 italic block text-lg">Receita Original</span>
                 )
                 }
                 

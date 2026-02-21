@@ -34,8 +34,8 @@ export default function PizzaCard({ pizzaCard, adicionarAoCarrinho, editarProdut
                         e.stopPropagation();
                         adicionarAoCarrinho(pizzaCard)
                     }}
-                    className="bg-amber-600 active:scale-90 hover:bg-amber-500 w-16 h-14 flex items-center justify-center text-zinc-950 rounded-2xl transition-all shadow-[0_0_20px_rgba(217,119,6,0.2)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    className="bg-amber-600 active:scale-90 hover:bg-amber-500 w-24 h-16 flex items-center justify-center text-zinc-950 rounded-2xl transition-all shadow-[0_0_20px_rgba(217,119,6,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14"/><path d="M12 5v14"/>
                     </svg>
                 </button>

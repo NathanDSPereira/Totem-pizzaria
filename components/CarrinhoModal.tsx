@@ -8,7 +8,7 @@ export default function CarrinhoModal({itens, fechar, remover, total, todosOsIng
             <div className="w-125 bg-zinc-950 h-full border-l border-zinc-900 p-8 flex flex-col animate-in slide-in-from-right duration-300">
                 
                 <div className="flex justify-between items-center mb-10">
-                    <h2 className="text-slate-100 text-3xl font-black uppercase">Meus Pedidos</h2>
+                    <h2 className="text-slate-100 text-4xl font-black uppercase">Meus Pedidos</h2>
                     <button onClick={fechar} className="text-red-700 text-xl font-bold uppercase">
                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     </button>
@@ -17,7 +17,7 @@ export default function CarrinhoModal({itens, fechar, remover, total, todosOsIng
 
                 {itens.length === 0 && (
                     <div className="flex-1 flex items-center justify-center">
-                        <p className="text-zinc-500 text-xl font-bold">Que tal adicionar uma pizza?</p>
+                        <p className="text-zinc-500 text-2xl font-bold">Que tal adicionar uma pizza?</p>
                     </div>
                 )} 
                 
