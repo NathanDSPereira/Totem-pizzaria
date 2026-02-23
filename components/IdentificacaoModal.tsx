@@ -1,4 +1,11 @@
-export default function LocalConsumoModal({fechar, selecionarLocalConsumo}: {fechar: () => void, selecionarLocalConsumo: (local: 'local' | 'viagem') => void}) {
+import { useState } from "react";
+
+export default function IdentificacaoModal({fechar, confirmarIdentificacaoCliente}: {fechar: () => void, confirmarIdentificacaoCliente: (nome: string, telefone: string) => void}) {
+    
+    const [nome, setNome] = useState("");
+    const [telefone, setTelefone] = useState("");
+    const [campoFoco, setCampoFoco] = useState<"nome" | "telefone">("nome");
+
     return (
         <section className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100 flex justify-center items-center">
             <div className="max-w-[90vw] w-[70vw] max-h-[90vh] h-[75vh] bg-zinc-950 border border-zinc-900 rounded-2xl p-5 animate-in zoom-in duration-300">
@@ -11,12 +18,11 @@ export default function LocalConsumoModal({fechar, selecionarLocalConsumo}: {fec
                     
                     <div className="flex-2 flex flex-col justify-around gap-10">
                         <div className="flex justify-center items-center mb-10 text-center">
-                            <h3 className="letter-spacing-1 text-slate-200 text-4xl font-black uppercase tracking-wide">Selecione o local de consumo</h3>
+                            <h3 className="letter-spacing-1 text-slate-200 text-4xl font-black uppercase tracking-wide">Quase lá! <span className="text-amber-600">como te avisamos?</span></h3>
                         </div>
                         
                         <div className="mt-8 flex gap-10 flex-wrap">
                             <button 
-                                onClick={() => selecionarLocalConsumo('local')}
                                 className="flex-1 bg-amber-600 transition-all  text-black font-bold h-64 rounded-2xl shadow-lg active:scale-95">
                                 <div className="flex flex-col gap-10 justify-center items-center">
                                     <p className="text-2xl text-zinc-950 font-bold uppercase italic">No local</p>
@@ -25,7 +31,6 @@ export default function LocalConsumoModal({fechar, selecionarLocalConsumo}: {fec
                             </button>
 
                             <button 
-                                onClick={() => selecionarLocalConsumo('viagem')}
                                 className="flex-1 bg-zinc-800 transition-all  text-zinc-500 font-bold h-64 rounded-2xl shadow-lg active:scale-95">
                                 <div className="flex flex-col gap-10 justify-center items-center">
                                     <p className="text-2xl text-slate-200 font-bold uppercase italic">Para viagem</p>

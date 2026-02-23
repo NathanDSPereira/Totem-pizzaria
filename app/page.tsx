@@ -18,6 +18,7 @@ import { PedidoFinal } from '@/interface/PedidoFinal';
 
 import { useEffect, useRef, useState } from 'react';
 import Toast from '@/components/Toast';
+import IdentificacaoModal from '@/components/IdentificacaoModal';
 
 
 export default function Home() {
@@ -69,6 +70,8 @@ export default function Home() {
   const [dadosPedidoFinal, setDadosPedidoFinal] = useState<PedidoFinal>({
     localConsumo: "local",
     cliente: "",
+    telefoneCliente: "",
+    statusPedido: "pendente",
     metodoPagamento: "",
     produtos: [],
     valorTotal: 0,
@@ -220,6 +223,8 @@ export default function Home() {
     setDadosPedidoFinal({
       localConsumo: "local",
       cliente: "",
+      telefoneCliente: "",
+      statusPedido: "pendente",
       metodoPagamento: "",
       produtos: [],
       valorTotal: 0,
@@ -227,11 +232,6 @@ export default function Home() {
     });
     
     setEtapaFinalizacao(0);
-  }
-
-  const confirmarLocalConsumo = (local: 'local' | 'viagem') => {
-    setDadosPedidoFinal((anteriores) => ({...anteriores, localConsumo: local})); 
-    avancarEtapaFinalizacao();
   }
 
   const iniciarFinalizacao = () => {
@@ -244,6 +244,21 @@ export default function Home() {
       }
     });
 
+    avancarEtapaFinalizacao();
+  }
+
+  const confirmarLocalConsumo = (local: 'local' | 'viagem') => {
+    setDadosPedidoFinal((anteriores) => ({...anteriores, localConsumo: local})); 
+    avancarEtapaFinalizacao();
+  }
+
+  const confirmarIdentificacaoCliente = (nome: string, telefone: string) => {
+    setDadosPedidoFinal((anteriores) => ({
+      ...anteriores,
+      cliente: nome,
+      telefoneCliente: telefone,
+      statusPedido: 'pendente'
+    })); 
     avancarEtapaFinalizacao();
   }
     
@@ -296,6 +311,13 @@ export default function Home() {
           <LocalConsumoModal 
             fechar={cancelarFinalizacao}
             selecionarLocalConsumo={confirmarLocalConsumo}
+          />
+        )}
+
+        {etapaFinalizacao === 2 && (
+          <IdentificacaoModal 
+            fechar={cancelarFinalizacao}
+            confirmarIdentificacaoCliente={confirmarIdentificacaoCliente}
           />
         )}
       </main>
