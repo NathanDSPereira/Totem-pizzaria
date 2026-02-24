@@ -1,10 +1,16 @@
 import { useState } from "react";
+import TecladoVirtual from "./TecladoVirtual";
 
 export default function IdentificacaoModal({fechar, confirmarIdentificacaoCliente}: {fechar: () => void, confirmarIdentificacaoCliente: (nome: string, telefone: string) => void}) {
     
     const [nome, setNome] = useState("");
     const [telefone, setTelefone] = useState("");
     const [campoFoco, setCampoFoco] = useState<"nome" | "telefone">("nome");
+
+    const digitarCaractere = (caractere: string) => {
+        if(campoFoco === "nome") setNome(prev => prev + caractere);
+        if(campoFoco === "telefone") setTelefone(prev => prev + caractere);
+    }
 
     return (
         <section className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100 flex justify-center items-center">
@@ -22,21 +28,24 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
                         </div>
                         
                         <div className="mt-8 flex gap-10 flex-wrap">
-                            <button 
-                                className="flex-1 bg-amber-600 transition-all  text-black font-bold h-64 rounded-2xl shadow-lg active:scale-95">
-                                <div className="flex flex-col gap-10 justify-center items-center">
-                                    <p className="text-2xl text-zinc-950 font-bold uppercase italic">No local</p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-utensils-icon lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
-                                </div>
-                            </button>
+                           <input 
+                                type="text" 
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
+                                className="w-full max-w-xs bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
+                            />
 
-                            <button 
-                                className="flex-1 bg-zinc-800 transition-all  text-zinc-500 font-bold h-64 rounded-2xl shadow-lg active:scale-95">
-                                <div className="flex flex-col gap-10 justify-center items-center">
-                                    <p className="text-2xl text-slate-200 font-bold uppercase italic">Para viagem</p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-shopping-bag-icon lucide-shopping-bag text-amber-600"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg>
-                                </div>
-                            </button>
+                            <input 
+                                type="text" 
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
+                                className="w-full max-w-xs bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
+                            />
+
+                            <TecladoVirtual 
+                                digitarCaractere={digitarCaractere} 
+                                campoFoco={campoFoco} 
+                            />
                         </div>
                     </div>
                 </div>
