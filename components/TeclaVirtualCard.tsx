@@ -3,7 +3,8 @@ export default function TeclaVirtualCard({digitarCaractere, caractere}: {digitar
     return (
         <button 
             onClick={() => digitarCaractere(caractere)}
-            className="bg-zinc-800 text-white font-bold h-16 rounded-lg shadow-lg hover:bg-zinc-700 transition-colors"
+            className="
+                bg-zinc-800 text-slate-300 text-2xl font-bold h-20 w-20 rounded-lg shadow-lg hover:bg-zinc-700 transition-all active:scale-90"
         >
             {caractere}
         </button>

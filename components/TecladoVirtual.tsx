@@ -21,7 +21,7 @@ export default function TecladoVirtual({digitarCaractere, campoFoco}: {digitarCa
     ]
 
     return (
-        <section className="w-full max-w-md mx-auto mt-10 grid grid-cols-3 gap-4">
+        <section className="w-full max-w-2/3 mt-10 flex flex-wrap gap-4 justify-center">
             {campoFoco === "telefone" ? (
                 caracteresNumeros.map(caractere => (
                     <TeclaVirtualCard 

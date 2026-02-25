@@ -27,25 +27,29 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
                             <h3 className="letter-spacing-1 text-slate-200 text-4xl font-black uppercase tracking-wide">Quase lá! <span className="text-amber-600">como te avisamos?</span></h3>
                         </div>
                         
-                        <div className="mt-8 flex gap-10 flex-wrap">
-                           <input 
-                                type="text" 
-                                value={nome}
-                                onChange={(e) => setNome(e.target.value)}
-                                className="w-full max-w-xs bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
-                            />
+                        <div className="flex items-center">
+                            <div className="flex gap-10 w-1/2 flex-col justify-center items-center">
+                                <input 
+                                    type="text" 
+                                    value={nome}
+                                    onClick={() => setCampoFoco('nome')}
+                                    className="w-full max-w-2/3 h-20 bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
+                                />
 
-                            <input 
-                                type="text" 
-                                value={nome}
-                                onChange={(e) => setNome(e.target.value)}
-                                className="w-full max-w-xs bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
-                            />
+                                <input 
+                                    type="text" 
+                                    value={telefone}
+                                    onClick={() => setCampoFoco('telefone')}
+                                    className="w-full max-w-2/3 h-20 bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
+                                />
+                            </div>
 
-                            <TecladoVirtual 
-                                digitarCaractere={digitarCaractere} 
-                                campoFoco={campoFoco} 
-                            />
+                            <div className="w-1/2 flex justify-center">
+                                <TecladoVirtual
+                                    digitarCaractere={digitarCaractere} 
+                                    campoFoco={campoFoco} 
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
