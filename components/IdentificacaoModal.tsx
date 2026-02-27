@@ -14,7 +14,7 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
 
     return (
         <section className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100 flex justify-center items-center">
-            <div className="max-w-[100vw] w-[90vw] max-h-screen h-[90vh] bg-zinc-950 border border-zinc-900 rounded-2xl p-5 animate-in zoom-in duration-300">
+            <div className="max-w-[100vw] w-[90vw] max-h-screen h-[90vh] md:h-screen bg-zinc-950 border border-zinc-900 rounded-2xl p-5 animate-in zoom-in duration-300">
                 <div className="w-full h-full">
                     <div className="w-full h-full flex flex-col">
                         <div>
@@ -23,9 +23,9 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
                             </button>
                         </div>
                     
-                        <div className="flex flex-col">
-                            <div className="flex justify-center items-center mb-20 text-center">
-                                <h3 className="letter-spacing-1 text-slate-200 text-4xl font-black uppercase tracking-wide">Quase lá! <span className="text-amber-600">como te avisamos?</span></h3>
+                        <div className="flex flex-col justify-center items-center h-full">
+                            <div className="flex justify-center items-center mb-11 text-center">
+                                <h3 className="letter-spacing-1 text-slate-200 text-3xl font-black uppercase tracking-wide">Quase lá! <span className="text-amber-600">como te avisamos?</span></h3>
                             </div>
                             
                             <div className="flex flex-col items-center justify-center h-full gap-15">
@@ -35,7 +35,7 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
                                         value={nome}
                                         onClick={() => setCampoFoco('nome')}
                                         placeholder="Seu nome..."
-                                        className="w-full h-20 bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
+                                        className="w-full h-16 bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
                                     />
 
                                     <input 
@@ -43,7 +43,7 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
                                         value={telefone}
                                         onClick={() => setCampoFoco('telefone')}
                                         placeholder="Seu telefone..."
-                                        className="w-full h-20 bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
+                                        className="w-full h-16 bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-slate-200 font-bold text-xl"
                                     />
                                 </div>
 
