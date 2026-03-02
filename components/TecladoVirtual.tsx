@@ -14,28 +14,6 @@ export default function TecladoVirtual({digitarCaractere, campoFoco}: {digitarCa
 
 
     return (
-        // <section className="flex justify-center w-full">
-        //     <div className="grid grid-cols-6 md:grid-cols-10 gap-3 w-full mx-auto max-w-4xl max-h-[50vh] overflow-hidden">
-        //         {campoFoco === "telefone" ? (
-        //             caracteresNumeros.map(caractere => (
-        //                 <TeclaVirtualCard 
-        //                     key={caractere}
-        //                     digitarCaractere={() => digitarCaractere(caractere)}
-        //                     caractere={caractere}
-        //                 />
-        //             ))
-        //         ) : (
-        //             caracteresLetras.map(caractere => (
-        //                 <TeclaVirtualCard 
-        //                     key={caractere}
-        //                     digitarCaractere={() => digitarCaractere(caractere)}
-        //                     caractere={caractere}
-        //                 />
-        //             ))
-        //         )}
-        //     </div>
-        // </section>
-
         <section className="flex flex-col gap-2 w-full max-w-6xl mx-auto">
              {campoFoco === "telefone" ? (
                     caracteresNumeros.map(caractere => (
