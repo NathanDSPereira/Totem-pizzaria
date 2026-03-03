@@ -318,6 +318,7 @@ export default function Home() {
           <IdentificacaoModal 
             fechar={cancelarFinalizacao}
             confirmarIdentificacaoCliente={confirmarIdentificacaoCliente}
+            voltarEtapaFinalizacao={voltarEtapaFinalizacao}
           />
         )}
       </main>
