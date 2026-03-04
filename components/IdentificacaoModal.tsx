@@ -7,6 +7,10 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
     const [telefone, setTelefone] = useState("");
     const [campoFoco, setCampoFoco] = useState<"nome" | "telefone">("nome");
 
+    const nomeValido = nome.trim().length > 3;
+    const telefoneValido = telefone.replace(/\D/g, '').length >= 11; // Considera válido se tiver pelo menos 10 dígitos
+    const podeConfirmar = nomeValido && telefoneValido;
+
     const digitarCaractere = (caractere: string) => {
         if(campoFoco === "nome") setNome(prev => prev + caractere);
         if(campoFoco === "telefone") setTelefone(prev => prev + caractere);
@@ -32,33 +36,43 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
                             </div>
                             
                             <button 
-                                className="bg-amber-600 text-black shadow-amber-900/20 active:scale-95 font-bold uppercase h-15 w-36 rounded-lg float-right" 
+                                className="bg-zinc-700 text-slate-200 shadow-amber-900/20 active:scale-95 font-bold uppercase h-12 w-32 rounded-lg float-right" 
                                 onClick={voltarEtapaFinalizacao}>
                                 Voltar
                             </button>
                         </div>
                     
                         <div className="flex flex-col items-center h-full w-full">  
-                            <div className="flex flex-col h-full w-full justify-around items-center">
+                            <div className="flex flex-col h-full w-full justify-around items-center relative">
                                 <div className="flex gap-10 w-3/4 flex-col justify-center items-center mt-5">
                                     <input 
                                         type="text" 
                                         value={nome}
+                                        inputMode="none"
                                         onClick={() => setCampoFoco('nome')}
                                         onFocus={() => setCampoFoco('nome')}
                                         placeholder="Seu nome..."
-                                        className="w-full h-16 md:h-14 p-4 bg-zinc-900 border-2 border-zinc-800 rounded-2xl text-xl text-white 
-                                                outline-none transition-all focus:border-amber-500"
+                                        className={nomeValido ? 
+                                                    `w-full h-16 md:h-14 p-4 bg-zinc-900 border-2 border-green-800 rounded-2xl text-xl text-white 
+                                                outline-none transition-all focus:border-amber-500` : 
+                                                    `w-full h-16 md:h-14 p-4 bg-zinc-900 border-2 border-zinc-500 rounded-2xl text-xl text-white 
+                                                outline-none transition-all focus:border-amber-500`
+                                            }
                                     />
 
                                     <input 
                                         type="text"
                                         value={telefone}
+                                        inputMode="none"
                                         placeholder="Seu telefone..."
                                         onFocus={() => setCampoFoco("telefone")}
                                         onClick={() => setCampoFoco('telefone')}
-                                        className="w-full h-16 md:h-14 p-4 bg-zinc-900 border-2 border-zinc-800 rounded-2xl text-xl text-white 
-                                                outline-none transition-all focus:border-amber-500"
+                                        className={telefoneValido ? 
+                                                    `w-full h-16 md:h-14 p-4 bg-zinc-900 border-2 border-green-800 rounded-2xl text-xl text-white 
+                                                outline-none transition-all focus:border-amber-500` : 
+                                                    `w-full h-16 md:h-14 p-4 bg-zinc-900 border-2 border-zinc-500 rounded-2xl text-xl text-white 
+                                                outline-none transition-all focus:border-amber-500`
+                                        }
                                     />
 
                                 </div>
@@ -69,6 +83,19 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
                                         campoFoco={campoFoco}
                                         apagarCaractere={apagarCaractere}
                                     />
+                                </div>
+
+                                <div className="w-full flex justify-end absolute bottom-1">
+                                    <button 
+                                        disabled={!podeConfirmar}
+                                        onClick={() => confirmarIdentificacaoCliente(nome, telefone)}
+                                        className={
+                                                podeConfirmar ?
+                                                `bg-amber-600 text-black shadow-amber-900/20 active:scale-95 font-bold uppercase h-15 w-40 md:h-14 rounded-lg float-right` :
+                                                `bg-zinc-600 text-gray-400 shadow-none active:scale-100 font-bold uppercase h-15 w-40 md:h-14 rounded-lg float-right`
+                                        }>
+                                        {podeConfirmar ? "Confirmar" : "Preencha os campos"}
+                                    </button>
                                 </div>
                             </div>
                         </div>

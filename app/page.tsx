@@ -261,9 +261,19 @@ export default function Home() {
     })); 
     avancarEtapaFinalizacao();
   }
+
+  const handleToggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((e) => {
+        console.error(`Erro ao tentar entrar em modo tela cheia: ${e.message}`);
+      });
+    }
+  };
     
   return (
-    <section className="overflow-hidden bg-zinc-950 h-screen pt-4 flex">
+    <section 
+      onClick={handleToggleFullscreen}
+      className="overflow-hidden bg-zinc-950 h-screen pt-4 flex">
 
       <script
         type="application/ld+json"
