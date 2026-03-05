@@ -91,7 +91,7 @@ export default function IdentificacaoModal({fechar, confirmarIdentificacaoClient
                                         onClick={() => confirmarIdentificacaoCliente(nome, telefone)}
                                         className={
                                                 podeConfirmar ?
-                                                `bg-amber-600 text-black shadow-amber-900/20 active:scale-95 font-bold uppercase h-15 w-40 md:h-14 rounded-lg float-right` :
+                                                `bg-amber-600 text-black shadow-amber-900/20 active:scale-95 font-bold uppercase h-16 w-50 md:h-15 rounded-lg float-right text-2xl` :
                                                 `bg-zinc-600 text-gray-400 shadow-none active:scale-100 font-bold uppercase h-15 w-40 md:h-14 rounded-lg float-right`
                                         }>
                                         {podeConfirmar ? "Confirmar" : "Preencha os campos"}

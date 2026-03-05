@@ -121,7 +121,7 @@ export default function CustomizacaoPizzaModal({
 
 
     return (
-        <section className="fixed inset-0 h-screen bg-black/80 z-200 flex justify-center items-center w-full mx-auto my-auto">
+        <section className="fixed inset-0 h-screen bg-black/70 backdrop-blur-sm  z-200 flex justify-center items-center w-full mx-auto my-auto">
             
             <div className="w-full mx-auto sm:overflow-y-auto custom-scrollbar my-auto max-w-[90vw] h-full max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-[40px] shadow-2xl overflow-hidden flex flex-col">
 
