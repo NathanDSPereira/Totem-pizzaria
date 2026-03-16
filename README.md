@@ -13,6 +13,7 @@ Este projeto é uma solução de totem interativo desenvolvida com Next.js, proj
 ✅ A Solução: Um sistema de autoatendimento intuitivo que permite ao cliente escolher, personalizar e finalizar seu pedido de forma autônoma.
 <br>
 <br>
+<br>
 
 🛠️ Tecnologias e Ferramentas
 Framework: Next.js (Focado em performance e rotas dinâmicas)
@@ -26,22 +27,23 @@ Estilização: Tailwind CSS (Interface otimizada para telas Touch)
 ✨ Diferenciais e Funcionalidades
 <br>
 Interface Touch-First: Botões grandes e navegação simplificada para facilitar o uso por qualquer perfil de cliente.
-
+<br>
 Redução de Fila: Processamento rápido de pedidos, desafogando a equipe de frente de caixa.
-
+<br>
 Cardápio Interativo: Fotos em alta resolução e descrições detalhadas dos sabores.
-
+<br>
 Customização de Pedidos: Opções de bordas recheadas, remoção de ingredientes.
-
+<br>
 Status em Tempo Real: (Em desenvolvimento) Integração para envio imediato do pedido para a cozinha.
 
 <br>
 <br>
 🏗️ Arquitetura do Sistema
+<br>
 O projeto foi estruturado para ser resiliente e rápido, utilizando os seguintes pilares:
-
+<br>
 Componentização: Reuso de elementos de interface (UI Kit próprio).
-
+<br>
 Responsividade: Design fixo para resoluções de totens (comumente 1080x1920 ou tablets).
-
+<br>
 Segurança: Validação de inputs para evitar erros no envio dos dados à cozinha.
