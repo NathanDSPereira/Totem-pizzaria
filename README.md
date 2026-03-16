@@ -4,6 +4,7 @@
 Este projeto é uma solução de totem interativo desenvolvida com Next.js, projetada especificamente para otimizar o fluxo de atendimento presencial em pizzarias durante horários de pico.
 <br>
 <br>
+<br>
 ⚠️ Status do Projeto: Em Desenvolvimento (Work in Progress) 🛠️ : [https://totem-pizzaria-phi.vercel.app/]
 <br>
 <br>
@@ -23,6 +24,7 @@ Estilização: Tailwind CSS (Interface otimizada para telas Touch)
 <br>
 <br>
 ✨ Diferenciais e Funcionalidades
+<br>
 Interface Touch-First: Botões grandes e navegação simplificada para facilitar o uso por qualquer perfil de cliente.
 
 Redução de Fila: Processamento rápido de pedidos, desafogando a equipe de frente de caixa.
