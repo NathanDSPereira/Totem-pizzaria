@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🖥️ Totem de Autoatendimento - Pizzaria
+<br>
+<br>
+Este projeto é uma solução de totem interativo desenvolvida com Next.js, projetada especificamente para otimizar o fluxo de atendimento presencial em pizzarias durante horários de pico.
+<br>
+<br>
+⚠️ Status do Projeto: Em Desenvolvimento (Work in Progress) 🛠️ : [https://totem-pizzaria-phi.vercel.app/]
+<br>
+<br>
+🚀 O Problema: Longas filas e sobrecarga dos funcionários no balcão, gerando demora e possíveis erros nos pedidos.
 
-## Getting Started
+✅ A Solução: Um sistema de autoatendimento intuitivo que permite ao cliente escolher, personalizar e finalizar seu pedido de forma autônoma.
+<br>
+<br>
 
-First, run the development server:
+🛠️ Tecnologias e Ferramentas
+Framework: Next.js (Focado em performance e rotas dinâmicas)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Linguagem: TypeScript
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Estilização: Tailwind CSS (Interface otimizada para telas Touch)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<br>
+<br>
+✨ Diferenciais e Funcionalidades
+Interface Touch-First: Botões grandes e navegação simplificada para facilitar o uso por qualquer perfil de cliente.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Redução de Fila: Processamento rápido de pedidos, desafogando a equipe de frente de caixa.
 
-## Learn More
+Cardápio Interativo: Fotos em alta resolução e descrições detalhadas dos sabores.
 
-To learn more about Next.js, take a look at the following resources:
+Customização de Pedidos: Opções de bordas recheadas, remoção de ingredientes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Status em Tempo Real: (Em desenvolvimento) Integração para envio imediato do pedido para a cozinha.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<br>
+<br>
+🏗️ Arquitetura do Sistema
+O projeto foi estruturado para ser resiliente e rápido, utilizando os seguintes pilares:
 
-## Deploy on Vercel
+Componentização: Reuso de elementos de interface (UI Kit próprio).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Responsividade: Design fixo para resoluções de totens (comumente 1080x1920 ou tablets).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Segurança: Validação de inputs para evitar erros no envio dos dados à cozinha.
