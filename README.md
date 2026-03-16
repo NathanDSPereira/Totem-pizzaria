@@ -28,11 +28,15 @@ Estilização: Tailwind CSS (Interface otimizada para telas Touch)
 <br>
 Interface Touch-First: Botões grandes e navegação simplificada para facilitar o uso por qualquer perfil de cliente.
 <br>
+<br>
 Redução de Fila: Processamento rápido de pedidos, desafogando a equipe de frente de caixa.
+<br>
 <br>
 Cardápio Interativo: Fotos em alta resolução e descrições detalhadas dos sabores.
 <br>
+<br>
 Customização de Pedidos: Opções de bordas recheadas, remoção de ingredientes.
+<br>
 <br>
 Status em Tempo Real: (Em desenvolvimento) Integração para envio imediato do pedido para a cozinha.
 
@@ -42,8 +46,11 @@ Status em Tempo Real: (Em desenvolvimento) Integração para envio imediato do p
 <br>
 O projeto foi estruturado para ser resiliente e rápido, utilizando os seguintes pilares:
 <br>
+<br>
 Componentização: Reuso de elementos de interface (UI Kit próprio).
 <br>
+<br>
 Responsividade: Design fixo para resoluções de totens (comumente 1080x1920 ou tablets).
+<br>
 <br>
 Segurança: Validação de inputs para evitar erros no envio dos dados à cozinha.
